@@ -14,6 +14,7 @@ class SearchViewController: UIViewController {
     let viewModel = SearchViewModel()
     let disposeBag = DisposeBag()
     
+    @IBOutlet weak var searchListTableView: SearchListTableView!
     @IBOutlet weak var histoyTableView: SearchHistoryTableView!
     @IBOutlet weak var searchTextField: UITextField!
     
@@ -43,19 +44,24 @@ class SearchViewController: UIViewController {
             self.histoyTableView.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
-        viewModel.requestResult.subscribe { result in
+        viewModel.requestResult.observeOn(MainScheduler.instance)
+            .subscribe { result in
             if let error = result.error {
                 print("requestResult = ", error)
             } else {
+                self.searchListTableView.isHidden = false
                 print("requestResult = ", result)
             }
-        }
+        }.disposed(by: disposeBag)
         
         searchController.searchBar.rx.searchButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
             if let text = self.searchController.searchBar.text {
                 self.viewModel.saveData(text: text)
                 self.viewModel.loadData()
+                
+                self.viewModel.searchUrl(text: text)
             }
+            
             self.searchController.isActive = false
         }).disposed(by: disposeBag)
          
@@ -65,28 +71,19 @@ class SearchViewController: UIViewController {
         
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
             print("searchBar.rx.text: \($0)")
+            self.searchListTableView.isHidden = true
             if $0 == "" {
                 self.histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
             } else {
                 self.viewModel.initialSort(text: $0)
             }
         }).disposed(by: disposeBag)
-        
-//        searchBar.rx.text.asObservable()
-//            .map { ($0 ?? "").lowercased() }
-//            .map { UniversityRequest(name: $0) }
-//            .flatMap { request -> Observable<[UniversityModel]> in
-//                return self.apiClient.send(apiRequest: request)
-//        }.disposed(by: disposeBag)
-        
-//        .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) { index, model, cell in
-//            cell.textLabel?.text = model.name
-//        }
-        
+         
         viewModel.loadData()
     }
     
     func setupUI() {
+        searchListTableView.isHidden = true
         histoyTableView.searchHistoryTableViewDelegate = self
         
         searchController.searchBar.setValue("취소", forKey:"cancelButtonText")

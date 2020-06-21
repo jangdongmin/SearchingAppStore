@@ -10,6 +10,8 @@
 		0949B5A7249F8F7D009D167E /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5A6249F8F7D009D167E /* APIRequest.swift */; };
 		0949B5A9249F9426009D167E /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5A8249F9426009D167E /* APIClient.swift */; };
 		0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AA249F9450009D167E /* AppStoreRequest.swift */; };
+		0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */; };
+		0949B5AF249FC1F6009D167E /* SearchListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AD249FC1F6009D167E /* SearchListTableView.swift */; };
 		09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388BF249F019D0046DC6A /* AppDelegate.swift */; };
 		09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388C3249F019D0046DC6A /* SearchViewController.swift */; };
 		09F388C7249F019D0046DC6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F388C5249F019D0046DC6A /* Main.storyboard */; };
@@ -28,6 +30,8 @@
 		0949B5A6249F8F7D009D167E /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
 		0949B5A8249F9426009D167E /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		0949B5AA249F9450009D167E /* AppStoreRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreRequest.swift; sourceTree = "<group>"; };
+		0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListTableViewCell.swift; sourceTree = "<group>"; };
+		0949B5AD249FC1F6009D167E /* SearchListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListTableView.swift; sourceTree = "<group>"; };
 		09F388BC249F019D0046DC6A /* SearchingAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchingAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F388BF249F019D0046DC6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F388C3249F019D0046DC6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -58,6 +62,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0949B5B0249FCD7E009D167E /* Resouce */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resouce;
+			sourceTree = "<group>";
+		};
 		09F388B3249F019D0046DC6A = {
 			isa = PBXGroup;
 			children = (
@@ -92,6 +103,8 @@
 		09F388D3249F020E0046DC6A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0949B5AD249FC1F6009D167E /* SearchListTableView.swift */,
+				0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */,
 				09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */,
 				09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */,
 				09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */,
@@ -127,6 +140,7 @@
 		09F388D7249F02260046DC6A /* Asset */ = {
 			isa = PBXGroup;
 			children = (
+				0949B5B0249FCD7E009D167E /* Resouce */,
 				09F388C5249F019D0046DC6A /* Main.storyboard */,
 				09F388C8249F019E0046DC6A /* Assets.xcassets */,
 				09F388CA249F019E0046DC6A /* LaunchScreen.storyboard */,
@@ -270,6 +284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09F388E8249F53F90046DC6A /* AppInfo.swift in Sources */,
+				0949B5AF249FC1F6009D167E /* SearchListTableView.swift in Sources */,
 				09F388EA249F55520046DC6A /* SearchViewModel.swift in Sources */,
 				09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */,
 				0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */,
@@ -277,6 +292,7 @@
 				09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */,
 				09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */,
 				09F388DB249F06B10046DC6A /* Extension+UIVIew.swift in Sources */,
+				0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */,
 				09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */,
 				0949B5A9249F9426009D167E /* APIClient.swift in Sources */,
 			);

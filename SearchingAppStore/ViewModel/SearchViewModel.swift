@@ -40,9 +40,11 @@ class SearchViewModel {
         if text == "" {
             return
         }
-        if var array = UserDefaults.standard.array(forKey: "history") {
-            array.insert(text, at: 0)
-            UserDefaults.standard.set(array, forKey: "history")
+        if var array = UserDefaults.standard.array(forKey: "history") as? [String] {
+            if !array.contains(text) {
+                array.insert(text, at: 0)
+                UserDefaults.standard.set(array, forKey: "history")
+            }
         } else {
             UserDefaults.standard.set([text], forKey: "history")
         }

@@ -95,9 +95,8 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
         if initial {
             return nil
         } else {
-            return tableView.dequeueReusableCell(withIdentifier:    "SearchHistoryTableViewHeader")
+            return tableView.dequeueReusableCell(withIdentifier: "SearchHistoryTableViewHeader")
         }
-        
     }
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
