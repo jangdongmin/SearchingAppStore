@@ -7,125 +7,96 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class SearchViewController: UIViewController {
-
+    let viewModel = SearchViewModel()
+    let disposeBag = DisposeBag()
+    
     @IBOutlet weak var histoyTableView: SearchHistoryTableView!
     @IBOutlet weak var searchTextField: UITextField!
     
-    @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var topViewBottomLine: UIImageView!
-    
-    @IBOutlet weak var titleView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var titleViewTopMargin: NSLayoutConstraint!
+    private let searchController: UISearchController = {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = "Search for university"
+        return searchController
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-//        histoyTableView.setData(strArr: [], initial: false)
-        histoyTableView.setData(searchText: "12", strArr: ["34","12","123","124","5678","1234"])
-        
-        setupUI()
-    }
- 
-    func setupUI() {
-        searchBar.setValue("취소", forKey:"cancelButtonText")
-        searchBar.delegate = self
-        
-        histoyTableView.searchHistoryTableViewDelegate = self
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        registerForKeyboardNotifications()
-    }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        unregisterForKeyboardNotifications()
+        setupUI()
+        setupBind()
     }
     
-    func registerForKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.addObserver(self, selector:#selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+    func setupBind() {
+        //최근 검색어 - 전체
+        viewModel.allHistorySubject.asObservable().subscribe {
+            print("allHistorySubject = ", $0)
+            self.histoyTableView.setData(strArr: $0.element ?? [], initial: false)
+        }.disposed(by: disposeBag)
+        
+        //search bar에서 검색했을때
+        viewModel.sortHistorySubject.asObservable().subscribe {
+            print("sortHistorySubject = ", $0)
+            self.histoyTableView.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
+        }.disposed(by: disposeBag)
+        
+        viewModel.appDetailInfo.subscribe {
+            print("appDetailInfo")
+            
+        }.disposed(by: disposeBag)
+        
+        searchController.searchBar.rx.searchButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+            if let text = self.searchController.searchBar.text {
+                self.viewModel.saveData(text: text)
+                self.viewModel.loadData()
+            }
+            self.searchController.isActive = false
+        }).disposed(by: disposeBag)
+         
+        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+//            self.keyboardDown()
+        }).disposed(by: disposeBag)
+        
+        searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
+            print("searchBar.rx.text: \($0)")
+            if $0 == "" {
+                self.histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
+            } else {
+                self.viewModel.initialSort(text: $0)
+            }
+        }).disposed(by: disposeBag)
+        
+//        searchBar.rx.text.asObservable()
+//            .map { ($0 ?? "").lowercased() }
+//            .map { UniversityRequest(name: $0) }
+//            .flatMap { request -> Observable<[UniversityModel]> in
+//                return self.apiClient.send(apiRequest: request)
+//        }.disposed(by: disposeBag)
+        
+//        .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) { index, model, cell in
+//            cell.textLabel?.text = model.name
+//        }
+        viewModel.loadData()
     }
     
-    func unregisterForKeyboardNotifications() {
-        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillShowNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name:UIResponder.keyboardWillHideNotification, object: nil)
+    func setupUI() {
+        searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
+        histoyTableView.searchHistoryTableViewDelegate = self
+        
+        navigationItem.searchController = searchController
+        navigationItem.title = "University finder"
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
-
+//https://itunes.apple.com/search?term=카카오뱅크&country=kr&entity=software
 extension SearchViewController: SearchHistoryTableViewDelegate {
     func select(index: Int) {
         print("index = ", index)
         
     }
-    
-    @IBAction func cancelButtonClick(_ sender: Any) {
-        searchTextField.text = ""
-        searchTextField.resignFirstResponder()
-    }
-    @IBAction func xButtonClick(_ sender: Any) {
-        searchTextField.text = ""
-    }
 }
-
-extension SearchViewController: UITextFieldDelegate, UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        print(searchText)
-    }
-    
-    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
-        keyboardUp()
-        return true
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        keyboardDown()
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        keyboardDown()
-    }
-    
-    @objc func keyboardWillShow(notification: NSNotification) {
-        keyboardUp()
-    }
-    
-    @objc func keyboardWillHide(notification: NSNotification) {
-        keyboardDown()
-    }
-     
-    func keyboardUp() {
-        titleViewTopMargin.constant = -titleView.frame.height
-        searchBar.showsCancelButton = true
-        
-        UIView.animate(withDuration: 0.2) {
-            self.titleView.isHidden = true
-            self.topViewBottomLine.isHidden = false
-            if #available(iOS 13.0, *) {
-                self.topView.backgroundColor = .systemGray6
-            } else {
-                // Fallback on earlier versions
-            }
-            self.view.layoutIfNeeded()
-        }
-    }
-    
-    func keyboardDown() {
-        searchBar.text = ""
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
-        
-        titleViewTopMargin.constant = 0
-        searchBar.showsCancelButton = false
-        
-        UIView.animate(withDuration: 0.2) {
-            self.titleView.isHidden = false
-            self.topViewBottomLine.isHidden = true
-            self.topView.backgroundColor = .white
-            self.view.layoutIfNeeded()
-        }
-    }
-     
-}
-
+ 

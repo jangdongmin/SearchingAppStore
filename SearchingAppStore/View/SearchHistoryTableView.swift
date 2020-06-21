@@ -21,23 +21,20 @@ class SearchHistoryTableView: UITableView {
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
+        
+        setupUI()
     }
     
     public func setData(strArr: [String], initial: Bool) {
         contents = strArr
         self.initial = initial
-        
-        setupUI()
+        self.reloadData()
     }
     
     public func setData(searchText: String ,strArr: [String]) {
         contents = strArr
-        
         self.initial = true
         self.searchText = searchText
-        
-        setupUI()
-        
         self.reloadData()
     }
     
@@ -49,8 +46,6 @@ class SearchHistoryTableView: UITableView {
 
 extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(indexPath.row)
-        
         searchHistoryTableViewDelegate?.select(index: indexPath.row)
     }
     
@@ -63,15 +58,16 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchHistoryTableViewCell.self), for: indexPath) as? SearchHistoryTableViewCell {
             
             cell.searchImageView.isHidden = !initial
+            cell.titleLabel.textColor = .lightGray
             
             if initial {
                 let historyText = contents[indexPath.row]
                 let attributedStr = NSMutableAttributedString(string: historyText)
                  
                 print("searchText = ", searchText, " historyText = ", historyText)
-                print((historyText as NSString).range(of: searchText))
+                print((historyText as NSString).range(of: searchText.lowercased()))
                 
-                attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText as NSString).range(of: searchText))
+                attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText as NSString).range(of: searchText.lowercased()))
                 cell.titleLabel.attributedText = attributedStr
                 
                 cell.bottomLineImageView.isHidden = false
