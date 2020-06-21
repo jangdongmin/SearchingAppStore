@@ -1,0 +1,6 @@
+module Pods_SearchingAppStore {
+  umbrella header "Pods-SearchingAppStore-umbrella.h"
+
+  export *
+  module * { export * }
+}
