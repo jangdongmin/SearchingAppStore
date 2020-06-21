@@ -19,7 +19,7 @@
 		09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */; };
 		09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */; };
 		09F388E6249F3D620046DC6A /* SearchHistoryTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */; };
-		09F388E8249F53F90046DC6A /* History.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388E7249F53F90046DC6A /* History.swift */; };
+		09F388E8249F53F90046DC6A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388E7249F53F90046DC6A /* AppInfo.swift */; };
 		09F388EA249F55520046DC6A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388E9249F55520046DC6A /* SearchViewModel.swift */; };
 		52612A440B3D519BC6B14EB4 /* libPods-SearchingAppStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5DE8319CEA959F41D1F008 /* libPods-SearchingAppStore.a */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableView.swift; sourceTree = "<group>"; };
 		09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHistoryTableViewHeader.xib; sourceTree = "<group>"; };
-		09F388E7249F53F90046DC6A /* History.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = History.swift; sourceTree = "<group>"; };
+		09F388E7249F53F90046DC6A /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		09F388E9249F55520046DC6A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		5A5DE8319CEA959F41D1F008 /* libPods-SearchingAppStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SearchingAppStore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7162540DB99D37CF46AA4CC3 /* Pods-SearchingAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchingAppStore.release.xcconfig"; path = "Target Support Files/Pods-SearchingAppStore/Pods-SearchingAppStore.release.xcconfig"; sourceTree = "<group>"; };
@@ -110,7 +110,7 @@
 		09F388D5249F02180046DC6A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				09F388E7249F53F90046DC6A /* History.swift */,
+				09F388E7249F53F90046DC6A /* AppInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -269,7 +269,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				09F388E8249F53F90046DC6A /* History.swift in Sources */,
+				09F388E8249F53F90046DC6A /* AppInfo.swift in Sources */,
 				09F388EA249F55520046DC6A /* SearchViewModel.swift in Sources */,
 				09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */,
 				0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */,

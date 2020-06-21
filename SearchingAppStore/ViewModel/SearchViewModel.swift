@@ -10,21 +10,21 @@ import UIKit
 import RxSwift
 import RxCocoa
 class SearchViewModel {
-    private let apiClient = APIClient()
+    let apiClient = APIClient()
     
     let allHistorySubject = BehaviorRelay(value: [""])
     let sortHistorySubject = BehaviorRelay(value: [""])
-    
-    let appDetailInfo = PublishSubject<History>()
-    
+    let requestResult = PublishSubject<AppInfoDict>()
+    let disposeBag = DisposeBag()
     
     func initialSort(text: String) {
         let historyArr = allHistorySubject.value
         
         var sortArr = [String]()
         for historyText in historyArr {
-            if (historyText as NSString).range(of: text.lowercased()).lowerBound == 0 {
-                sortArr.append(text.lowercased())
+            print((historyText.lowercased() as NSString).range(of: text.lowercased()), " historyText = ", historyText)
+            if (historyText.lowercased() as NSString).range(of: text.lowercased()).lowerBound == 0 {
+                sortArr.append(historyText)
             }
         }
         sortHistorySubject.accept(sortArr)
@@ -48,5 +48,13 @@ class SearchViewModel {
         }
     }
     
-     
+    func searchUrl(text: String) {
+        let observer: Observable<AppInfoDict> = self.apiClient.send(apiRequest: AppStoreRequest(term: text.lowercased()))
+        observer.subscribe(onNext: { result in
+//            print(result)
+            self.requestResult.onNext(result)
+        }, onError: { error in
+            print(error)
+        }).disposed(by: disposeBag)
+    }
 }

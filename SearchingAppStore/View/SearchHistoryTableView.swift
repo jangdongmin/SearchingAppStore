@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchHistoryTableViewDelegate {
-    func select(index: Int)
+    func select(title: String)
 }
 
 class SearchHistoryTableView: UITableView {
@@ -46,7 +46,7 @@ class SearchHistoryTableView: UITableView {
 
 extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchHistoryTableViewDelegate?.select(index: indexPath.row)
+        searchHistoryTableViewDelegate?.select(title: contents[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -65,9 +65,9 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
                 let attributedStr = NSMutableAttributedString(string: historyText)
                  
                 print("searchText = ", searchText, " historyText = ", historyText)
-                print((historyText as NSString).range(of: searchText.lowercased()))
+                print((historyText.lowercased() as NSString).range(of: searchText.lowercased()))
                 
-                attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText as NSString).range(of: searchText.lowercased()))
+                attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText.lowercased() as NSString).range(of: searchText.lowercased()))
                 cell.titleLabel.attributedText = attributedStr
                 
                 cell.bottomLineImageView.isHidden = false

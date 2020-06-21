@@ -8,12 +8,15 @@
 
 import Foundation
 
+//https://itunes.apple.com/search?term=카카오뱅크&country=kr&entity=software
 class AppStoreRequest: APIRequest {
     var method = RequestType.GET
     var path = "search"
     var parameters = [String: String]()
 
-    init(name: String) {
-        parameters["name"] = name
+    init(term: String) {
+        parameters["term"] = term
+        parameters["country"] = "kr"
+        parameters["entity"] = "software"
     }
 }

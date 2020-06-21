@@ -10,7 +10,7 @@ import Foundation
 import RxSwift
 
 class APIClient {
-    private let baseURL = URL(string: "http://universities.hipolabs.com/")!
+    private let baseURL = URL(string: "https://itunes.apple.com/")!
 
     func send<T: Codable>(apiRequest: APIRequest) -> Observable<T> {
         return Observable<T>.create { [unowned self] observer in
@@ -19,6 +19,7 @@ class APIClient {
                 do {
                     let model: T = try JSONDecoder().decode(T.self, from: data ?? Data())
                     observer.onNext(model)
+                    
                 } catch let error {
                     observer.onError(error)
                 }

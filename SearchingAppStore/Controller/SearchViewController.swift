@@ -19,7 +19,7 @@ class SearchViewController: UIViewController {
     
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = "Search for university"
+        searchController.searchBar.placeholder = "App Store"
         return searchController
     }()
     
@@ -43,10 +43,13 @@ class SearchViewController: UIViewController {
             self.histoyTableView.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
-        viewModel.appDetailInfo.subscribe {
-            print("appDetailInfo")
-            
-        }.disposed(by: disposeBag)
+        viewModel.requestResult.subscribe { result in
+            if let error = result.error {
+                print("requestResult = ", error)
+            } else {
+                print("requestResult = ", result)
+            }
+        }
         
         searchController.searchBar.rx.searchButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
             if let text = self.searchController.searchBar.text {
@@ -79,24 +82,26 @@ class SearchViewController: UIViewController {
 //        .bind(to: tableView.rx.items(cellIdentifier: cellIdentifier)) { index, model, cell in
 //            cell.textLabel?.text = model.name
 //        }
+        
         viewModel.loadData()
     }
     
     func setupUI() {
-        searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
         histoyTableView.searchHistoryTableViewDelegate = self
         
+        searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
+        searchController.dimsBackgroundDuringPresentation = false
         navigationItem.searchController = searchController
-        navigationItem.title = "University finder"
+        navigationItem.title = "검색"
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
     }
 }
-//https://itunes.apple.com/search?term=카카오뱅크&country=kr&entity=software
+
 extension SearchViewController: SearchHistoryTableViewDelegate {
-    func select(index: Int) {
-        print("index = ", index)
-        
+    func select(title: String) {
+        print("title = ", title)
+        viewModel.searchUrl(text: title)
     }
 }
  
