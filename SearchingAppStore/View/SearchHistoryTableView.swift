@@ -72,7 +72,7 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.bottomLineImageView.isHidden = false
             } else {
-                cell.titleLabel.textColor = .blue
+                cell.titleLabel.textColor = .systemBlue
                 cell.titleLabel.text = contents[indexPath.row]
                 
                 if indexPath.row > contents.count - 2 {

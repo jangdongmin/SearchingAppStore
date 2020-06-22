@@ -17,7 +17,7 @@ struct AppInfo: Codable {
     let artworkUrl100: String?
     let artworkUrl512: String?
     let artworkUrl60: String?
-    let averageUserRating: Double?
+    let averageUserRating: Double?     
     let averageUserRatingForCurrentVersion: Double?
     let bundleId: String?
     let contentAdvisoryRating: String?

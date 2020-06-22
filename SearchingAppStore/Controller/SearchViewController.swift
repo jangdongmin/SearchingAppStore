@@ -50,7 +50,9 @@ class SearchViewController: UIViewController {
                 print("requestResult = ", error)
             } else {
                 self.searchListTableView.isHidden = false
+                self.searchListTableView.setData(appInfoArr: result.element?.results ?? [])
                 print("requestResult = ", result)
+                
             }
         }.disposed(by: disposeBag)
         

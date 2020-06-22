@@ -59,4 +59,18 @@ class SearchViewModel {
             print(error)
         }).disposed(by: disposeBag)
     }
+    
+//    func prepareData(_ result: AppInfoDict) -> AppInfoDict {
+//        var appInfoDict = result
+//        for i in 0..<appInfoDict.results.count {
+//            var appInfo = appInfoDict.results[i]
+//
+//            appInfo.averageUserRatingHead = Int(appInfo.averageUserRating ?? 0)
+//            appInfo.averageUserRatingTail = appInfo.averageUserRating?.truncatingRemainder(dividingBy: 1) ?? 0
+//
+//            appInfoDict.results[i] = appInfo
+//        }
+//
+//        return appInfoDict
+//    }
 }

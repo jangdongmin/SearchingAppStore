@@ -9,44 +9,29 @@
 import UIKit
 
 protocol SearchListTableViewDelegate {
-    func select(title: String)
+    func detailSelect(appInfo: AppInfo)
 }
 
 class SearchListTableView: UITableView {
     var initial: Bool = false
-    var contents: [String] = []
+    var contents: [AppInfo] = []
     var searchText: String = ""
     var searchListTableViewDelegate: SearchListTableViewDelegate?
    
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
-        
-        setupUI()
     }
     
-    public func setData(strArr: [String], initial: Bool) {
-        contents = strArr
-        self.initial = initial
+    public func setData(appInfoArr: [AppInfo]) {
+        contents = appInfoArr
         self.reloadData()
-    }
-    
-    public func setData(searchText: String ,strArr: [String]) {
-        contents = strArr
-        self.initial = true
-        self.searchText = searchText
-        self.reloadData()
-    }
-    
-    private func setupUI() {
-        let loadingCellNib = UINib(nibName: "SearchHistoryTableViewHeader", bundle: nil)
-        self.register(loadingCellNib, forCellReuseIdentifier: "SearchHistoryTableViewHeader")
     }
 }
 
 extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchListTableViewDelegate?.select(title: contents[indexPath.row])
+        searchListTableViewDelegate?.detailSelect(appInfo: contents[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -58,13 +43,36 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchListTableViewCell.self), for: indexPath) as? SearchListTableViewCell {
              
+            let appInfo = contents[indexPath.row]
+            if let averageUserRating = appInfo.averageUserRating {
+                //averageUserRating
+                starCheck(cell, averageUserRating)
+            }
+            
+            //cell.star_1_ImageView
+            //averageUserRating
+            
             return cell
         }
         return UITableViewCell()
     }
      
+    func starCheck(_ cell: SearchListTableViewCell, _ averageUserRating: Double) {
+        let head = Int(averageUserRating)
+        let tail = averageUserRating.truncatingRemainder(dividingBy: 1)
+        
+        for i in 0..<cell.starImageArray.count {
+            if head > i {
+                cell.starImageArray[i].backgroundColor = .lightGray
+            } else {
+                cell.starImageArray[i].setRating(tail)
+                break
+            }
+        }
+    }
+ 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //return contents.count
-        return 19
+        return contents.count
     }
 }
+
