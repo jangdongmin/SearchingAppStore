@@ -45,23 +45,23 @@ class SearchViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         viewModel.requestResult.observeOn(MainScheduler.instance)
-            .subscribe { result in
-            if let error = result.error {
+            .subscribe {
+            if let error = $0.error {
                 print("requestResult = ", error)
             } else {
                 self.searchListTableView.isHidden = false
-                self.searchListTableView.setData(appInfoArr: result.element?.results ?? [])
-                print("requestResult = ", result)
+                self.searchListTableView.setData(appInfoArr: $0.element ?? [])
+                print("requestResult = ", $0)
                 
             }
         }.disposed(by: disposeBag)
-        
+         
         searchController.searchBar.rx.searchButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
             if let text = self.searchController.searchBar.text {
                 self.viewModel.saveData(text: text)
                 self.viewModel.loadData()
                 
-                self.viewModel.searchUrl(text: text)
+                self.viewModel.searchUrl(text: text, page: 0, inheritance: false)
             }
             
             self.searchController.isActive = false
@@ -97,10 +97,19 @@ class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: SearchHistoryTableViewDelegate {
+extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableViewDelegate {
+    func detailSelect(appInfo: AppInfo) {
+        print("detailSelect = ", appInfo)
+    }
+    
+    func dataMoreLoad(title: String, page: Int) {
+        viewModel.searchUrl(text: title, page: 0, inheritance: true)
+    }
+    
     func select(title: String) {
         print("title = ", title)
-        viewModel.searchUrl(text: title)
+        self.searchListTableView.searchText = title
+        viewModel.searchUrl(text: title, page: 0, inheritance: false)
     }
 }
  

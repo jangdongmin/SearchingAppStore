@@ -10,22 +10,31 @@ import UIKit
 
 protocol SearchListTableViewDelegate {
     func detailSelect(appInfo: AppInfo)
+    func dataMoreLoad(title: String, page: Int)
 }
 
 class SearchListTableView: UITableView {
-    var initial: Bool = false
-    var contents: [AppInfo] = []
     var searchText: String = ""
+    var page: Int = 0
+    var contents: [AppInfo] = []
+    
     var searchListTableViewDelegate: SearchListTableViewDelegate?
-   
+    var activityIndicator: LoadMoreActivityIndicator?
+    
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
+        
+        setupUI()
     }
     
     public func setData(appInfoArr: [AppInfo]) {
         contents = appInfoArr
         self.reloadData()
+    }
+    
+    private func setupUI() {
+        activityIndicator = LoadMoreActivityIndicator(scrollView: self, isBottom: true)
     }
 }
 
@@ -47,7 +56,18 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
             if let averageUserRating = appInfo.averageUserRating {
                 starCheck(cell, averageUserRating)
             }
-             
+            
+            if let trackName = appInfo.trackName {
+                cell.appNameLabel.text = trackName
+            }
+            
+            if let description = appInfo.description {
+                cell.appDescLabel.text = description
+            }
+            
+            if let userRatingCount = appInfo.userRatingCount {
+                cell.userRatingCountLabel.text = "\(userRatingCount)"
+            }
             
             return cell
         }
@@ -73,3 +93,19 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+extension SearchListTableView {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        activityIndicator?.start {
+            DispatchQueue.global(qos: .utility).async {
+                //sleep(3)
+                DispatchQueue.main.async { [weak self] in
+                    if let vc = self {
+                        vc.activityIndicator?.stop()
+                        vc.page += 1
+                        vc.searchListTableViewDelegate?.dataMoreLoad(title: vc.searchText, page: vc.page)
+                    }
+                }
+            }
+        }
+    }
+}

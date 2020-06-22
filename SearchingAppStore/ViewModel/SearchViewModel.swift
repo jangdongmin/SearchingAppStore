@@ -10,12 +10,15 @@ import UIKit
 import RxSwift
 import RxCocoa
 class SearchViewModel {
+    let disposeBag = DisposeBag()
     let apiClient = APIClient()
     
     let allHistorySubject = BehaviorRelay(value: [""])
     let sortHistorySubject = BehaviorRelay(value: [""])
-    let requestResult = PublishSubject<AppInfoDict>()
-    let disposeBag = DisposeBag()
+    
+    let requestResult = BehaviorRelay(value: [AppInfo]())
+    //let requestResult = PublishSubject<AppInfoDict>()
+    //let inheritance = PublishSubject<AppInfoDict>()
     
     func initialSort(text: String) {
         let historyArr = allHistorySubject.value
@@ -50,27 +53,20 @@ class SearchViewModel {
         }
     }
     
-    func searchUrl(text: String) {
-        let observer: Observable<AppInfoDict> = self.apiClient.send(apiRequest: AppStoreRequest(term: text.lowercased()))
-        observer.subscribe(onNext: { result in
-//            print(result)
-            self.requestResult.onNext(result)
+    func searchUrl(text: String, page: Int, inheritance: Bool) {
+        let observer: Observable<AppInfoDict> = self.apiClient.send(apiRequest: AppStoreRequest(term: text.lowercased(), offset: "\(page*25)"))
+        observer.subscribe(onNext: {
+            print($0)
+            if inheritance {
+                var results = self.requestResult.value
+                results.append(contentsOf: $0.results)
+                self.requestResult.accept(results)
+            } else {
+                self.requestResult.accept($0.results)
+            }
+            
         }, onError: { error in
             print(error)
         }).disposed(by: disposeBag)
     }
-    
-//    func prepareData(_ result: AppInfoDict) -> AppInfoDict {
-//        var appInfoDict = result
-//        for i in 0..<appInfoDict.results.count {
-//            var appInfo = appInfoDict.results[i]
-//
-//            appInfo.averageUserRatingHead = Int(appInfo.averageUserRating ?? 0)
-//            appInfo.averageUserRatingTail = appInfo.averageUserRating?.truncatingRemainder(dividingBy: 1) ?? 0
-//
-//            appInfoDict.results[i] = appInfo
-//        }
-//
-//        return appInfoDict
-//    }
 }

@@ -12,6 +12,7 @@
 		0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AA249F9450009D167E /* AppStoreRequest.swift */; };
 		0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */; };
 		0949B5AF249FC1F6009D167E /* SearchListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0949B5AD249FC1F6009D167E /* SearchListTableView.swift */; };
+		0955B89424A0EE3F00CF672A /* LoadMoreActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955B89324A0EE3F00CF672A /* LoadMoreActivityIndicator.swift */; };
 		09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388BF249F019D0046DC6A /* AppDelegate.swift */; };
 		09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388C3249F019D0046DC6A /* SearchViewController.swift */; };
 		09F388C7249F019D0046DC6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F388C5249F019D0046DC6A /* Main.storyboard */; };
@@ -33,6 +34,7 @@
 		0949B5AA249F9450009D167E /* AppStoreRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreRequest.swift; sourceTree = "<group>"; };
 		0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListTableViewCell.swift; sourceTree = "<group>"; };
 		0949B5AD249FC1F6009D167E /* SearchListTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchListTableView.swift; sourceTree = "<group>"; };
+		0955B89324A0EE3F00CF672A /* LoadMoreActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreActivityIndicator.swift; sourceTree = "<group>"; };
 		09F388BC249F019D0046DC6A /* SearchingAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchingAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F388BF249F019D0046DC6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F388C3249F019D0046DC6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -71,6 +73,25 @@
 			path = Resouce;
 			sourceTree = "<group>";
 		};
+		0955B89524A10A9D00CF672A /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				0949B5A6249F8F7D009D167E /* APIRequest.swift */,
+				0949B5A8249F9426009D167E /* APIClient.swift */,
+				0949B5AA249F9450009D167E /* AppStoreRequest.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		0955B89624A10C9100CF672A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */,
+				09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		09F388B3249F019D0046DC6A = {
 			isa = PBXGroup;
 			children = (
@@ -105,11 +126,11 @@
 		09F388D3249F020E0046DC6A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				0955B89624A10C9100CF672A /* Cell */,
+				0955B89324A0EE3F00CF672A /* LoadMoreActivityIndicator.swift */,
 				58DBA8D824A0629A00EAAA87 /* HorizontalView.swift */,
 				0949B5AD249FC1F6009D167E /* SearchListTableView.swift */,
-				0949B5AC249FC1F6009D167E /* SearchListTableViewCell.swift */,
 				09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */,
-				09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */,
 				09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */,
 			);
 			path = View;
@@ -155,10 +176,8 @@
 		09F388D8249F067C0046DC6A /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				0955B89524A10A9D00CF672A /* Networking */,
 				09F388DA249F06B10046DC6A /* Extension+UIVIew.swift */,
-				0949B5A6249F8F7D009D167E /* APIRequest.swift */,
-				0949B5A8249F9426009D167E /* APIClient.swift */,
-				0949B5AA249F9450009D167E /* AppStoreRequest.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -297,6 +316,7 @@
 				09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */,
 				09F388DB249F06B10046DC6A /* Extension+UIVIew.swift in Sources */,
 				0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */,
+				0955B89424A0EE3F00CF672A /* LoadMoreActivityIndicator.swift in Sources */,
 				09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */,
 				0949B5A9249F9426009D167E /* APIClient.swift in Sources */,
 			);
