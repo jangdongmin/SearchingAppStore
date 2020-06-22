@@ -18,5 +18,6 @@ class AppStoreRequest: APIRequest {
         parameters["term"] = term
         parameters["country"] = "kr"
         parameters["entity"] = "software"
+        parameters["limit"] = "200"
     }
 }

@@ -45,12 +45,9 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
              
             let appInfo = contents[indexPath.row]
             if let averageUserRating = appInfo.averageUserRating {
-                //averageUserRating
                 starCheck(cell, averageUserRating)
             }
-            
-            //cell.star_1_ImageView
-            //averageUserRating
+             
             
             return cell
         }
