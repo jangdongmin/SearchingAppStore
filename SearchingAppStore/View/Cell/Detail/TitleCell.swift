@@ -1,5 +1,5 @@
 //
-//  DetailTableViewTitleCell.swift
+//  TitleCell.swift
 //  SearchingAppStore
 //
 //  Created by Paul Jang on 2020/06/23.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailTableViewTitleCell: UITableViewCell {
+class TitleCell: UITableViewCell {
     @IBOutlet var appIconImageView: CustomImageView!
     
     @IBOutlet var appNameLabel: UILabel!

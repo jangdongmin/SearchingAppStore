@@ -24,13 +24,13 @@ class DetailTableView: UITableView {
 
 extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 500
+//        return 300
         return UITableView.automaticDimension
     }
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.section == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: DetailTableViewTitleCell.self), for: indexPath) as? DetailTableViewTitleCell {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TitleCell.self), for: indexPath) as? TitleCell {
                 
                 if let averageUserRating = appInfo?.averageUserRating {
                     Util.sharedInstance.starCheck(cell.starImageArray, averageUserRating)
@@ -61,18 +61,26 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                 
                 if let sellerName = appInfo?.sellerName {
                     cell.appDescLabel.text = sellerName
-//                    if appInfo.subTitle != "" {
-//                        cell.appDescLabel.text = appInfo.subTitle
-//                    }
                 }
-                
-                
-                
-                
+                print(cell.frame.size.height)
                 return cell
             }
         } else if indexPath.section == 1 {
-            print("2")
+            if let releaseNotes = appInfo?.releaseNotes {
+                if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RealseNoteCell.self), for: indexPath) as? RealseNoteCell {
+                    
+                    cell.releaseNoteLabel.text = releaseNotes
+                    
+                    if let version = appInfo?.version {
+                        cell.versionLabel.text = "버전 \(version)"
+                    }
+                    
+                    print(cell.frame.size.height)
+                    return cell
+                }
+            } else {
+                
+            }
         }
         
         return UITableViewCell()
