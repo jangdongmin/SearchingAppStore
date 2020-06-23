@@ -16,7 +16,7 @@ class SearchHistoryTableView: UITableView {
     var initial: Bool = false
     var contents: [String] = []
     var searchText: String = ""
-    var searchHistoryTableViewDelegate: SearchHistoryTableViewDelegate?
+    var historyTableViewDelegate: SearchHistoryTableViewDelegate?
    
     override func awakeFromNib() {
         self.delegate = self
@@ -46,7 +46,7 @@ class SearchHistoryTableView: UITableView {
 
 extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        searchHistoryTableViewDelegate?.select(title: contents[indexPath.row])
+        historyTableViewDelegate?.select(title: contents[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

@@ -18,6 +18,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var histoyTableView: SearchHistoryTableView!
     @IBOutlet weak var searchTextField: UITextField!
     
+    
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "App Store"
@@ -44,15 +45,15 @@ class SearchViewController: UIViewController {
             self.histoyTableView.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
-        viewModel.requestResult.observeOn(MainScheduler.instance)
-            .subscribe {
+        //검색결과는 이쪽으로 온다.
+        viewModel.requestResult.observeOn(MainScheduler.instance).subscribe {
+            self.searchListTableView.isLoading = false
+            
             if let error = $0.error {
                 print("requestResult = ", error)
             } else {
                 self.searchListTableView.isHidden = false
                 self.searchListTableView.setData(appInfoArr: $0.element ?? [])
-                print("requestResult = ", $0)
-                
             }
         }.disposed(by: disposeBag)
          
@@ -67,9 +68,9 @@ class SearchViewController: UIViewController {
             self.searchController.isActive = false
         }).disposed(by: disposeBag)
          
-        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
-//            self.keyboardDown()
-        }).disposed(by: disposeBag)
+//        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+////            self.keyboardDown()
+//        }).disposed(by: disposeBag)
         
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
             print("searchBar.rx.text: \($0)")
@@ -86,7 +87,9 @@ class SearchViewController: UIViewController {
     
     func setupUI() {
         searchListTableView.isHidden = true
-        histoyTableView.searchHistoryTableViewDelegate = self
+        searchListTableView.searchListTableViewDelegate = self
+        
+        histoyTableView.historyTableViewDelegate = self
         
         searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
         searchController.dimsBackgroundDuringPresentation = false
@@ -102,13 +105,16 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
         print("detailSelect = ", appInfo)
     }
     
-    func dataMoreLoad(title: String, page: Int) {
-        viewModel.searchUrl(text: title, page: 0, inheritance: true)
+    func dataMoreLoad(page: Int) {
+        if let searchText = self.searchController.searchBar.text {
+            print("dataMoreLoad = ", page)
+            viewModel.searchUrl(text: searchText, page: page, inheritance: true)
+        }
     }
     
     func select(title: String) {
         print("title = ", title)
-        self.searchListTableView.searchText = title
+        self.searchController.searchBar.text = title
         viewModel.searchUrl(text: title, page: 0, inheritance: false)
     }
 }

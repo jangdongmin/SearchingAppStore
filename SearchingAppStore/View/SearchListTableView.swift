@@ -10,31 +10,24 @@ import UIKit
 
 protocol SearchListTableViewDelegate {
     func detailSelect(appInfo: AppInfo)
-    func dataMoreLoad(title: String, page: Int)
+    func dataMoreLoad(page: Int)
 }
 
 class SearchListTableView: UITableView {
-    var searchText: String = ""
     var page: Int = 0
     var contents: [AppInfo] = []
+    var isLoading = false
     
     var searchListTableViewDelegate: SearchListTableViewDelegate?
-    var activityIndicator: LoadMoreActivityIndicator?
     
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
-        
-        setupUI()
     }
     
     public func setData(appInfoArr: [AppInfo]) {
         contents = appInfoArr
         self.reloadData()
-    }
-    
-    private func setupUI() {
-        activityIndicator = LoadMoreActivityIndicator(scrollView: self, isBottom: true)
     }
 }
 
@@ -45,7 +38,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return UITableView.automaticDimension
-        return 250
+        return 350
     }
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -61,19 +54,59 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.appNameLabel.text = trackName
             }
             
-            if let description = appInfo.description {
-                cell.appDescLabel.text = description
+            if let genres = appInfo.genres {
+                cell.appDescLabel.text = genres[0]
+//                if appInfo.subTitle != "" {
+//                    cell.appDescLabel.text = appInfo.subTitle
+//                }
             }
             
             if let userRatingCount = appInfo.userRatingCount {
-                cell.userRatingCountLabel.text = "\(userRatingCount)"
+                cell.userRatingCountLabel.text = "\(numberCutting(userRatingCount))"
+            }
+             
+            if let artworkUrl100 = appInfo.artworkUrl100 {
+                if let imgUrl = URL(string: artworkUrl100) {
+                    cell.appIconImageView.load(url: imgUrl, placeholder: nil)
+                }
+            }
+            
+            if let screenshotUrls = appInfo.screenshotUrls {
+                if let imgUrl = URL(string: screenshotUrls[0]) {
+                    cell.main_1_ImageView.load(url: imgUrl, placeholder: nil)
+                }
+                
+                if let imgUrl = URL(string: screenshotUrls[1]) {
+                    cell.main_2_ImageView.load(url: imgUrl, placeholder: nil)
+                }
+                
+                if let imgUrl = URL(string: screenshotUrls[2]) {
+                    cell.main_3_ImageView.load(url: imgUrl, placeholder: nil)
+                }
             }
             
             return cell
         }
         return UITableViewCell()
     }
-     
+    
+    func numberCutting(_ userRatingCount: Int) -> String {
+        if userRatingCount < 1000 {
+            return String(userRatingCount)
+        } else if userRatingCount < 10000 { //천단위
+            let str = Array(String(userRatingCount))
+            return "\(str[0]).\(str[1])천"
+        } else if userRatingCount < 100000 { //만단위
+            let str = Array(String(userRatingCount))
+            return "\(str[0]).\(str[1])만"
+        } else { //만단위 이상
+            let first = userRatingCount / 10000
+            let result = userRatingCount - first * 10000
+            let second = result / 1000
+            return "\(first).\(second)만"
+        }
+    }
+    
     func starCheck(_ cell: SearchListTableViewCell, _ averageUserRating: Double) {
         let head = Int(averageUserRating)
         let tail = averageUserRating.truncatingRemainder(dividingBy: 1)
@@ -95,16 +128,15 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
 
 extension SearchListTableView {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        activityIndicator?.start {
-            DispatchQueue.global(qos: .utility).async {
-                //sleep(3)
-                DispatchQueue.main.async { [weak self] in
-                    if let vc = self {
-                        vc.activityIndicator?.stop()
-                        vc.page += 1
-                        vc.searchListTableViewDelegate?.dataMoreLoad(title: vc.searchText, page: vc.page)
-                    }
-                }
+        let currentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+        if maximumOffset - currentOffset <= 20.0 && maximumOffset > 0 {
+            if !isLoading {
+                print("reload")
+                isLoading = true
+                
+                self.page += 1
+                self.searchListTableViewDelegate?.dataMoreLoad(page: self.page)
             }
         }
     }

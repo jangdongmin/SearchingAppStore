@@ -54,6 +54,8 @@ struct AppInfo: Codable {
     let version: String?
     let wrapperType: String?
     
+//    var subTitle: String = ""
+    
     private enum CodingKeys: String, CodingKey {
         case advisories
         case appletvScreenshotUrls
@@ -104,7 +106,7 @@ struct AppInfo: Codable {
 
 struct AppInfoDict: Codable {
     let resultCount: Int
-    let results: [AppInfo]
+    var results: [AppInfo]
     
     private enum CodingKeys: String, CodingKey {
         case resultCount
