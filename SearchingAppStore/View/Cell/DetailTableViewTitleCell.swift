@@ -1,14 +1,14 @@
 //
-//  SearchListTableViewCell.swift
+//  DetailTableViewTitleCell.swift
 //  SearchingAppStore
 //
-//  Created by Paul Jang on 2020/06/21.
+//  Created by Paul Jang on 2020/06/23.
 //  Copyright © 2020 Paul Jang. All rights reserved.
 //
 
 import UIKit
 
-class SearchListTableViewCell: UITableViewCell {
+class DetailTableViewTitleCell: UITableViewCell {
     @IBOutlet var appIconImageView: CustomImageView!
     
     @IBOutlet var appNameLabel: UILabel!
@@ -20,14 +20,16 @@ class SearchListTableViewCell: UITableViewCell {
     @IBOutlet var star_3_View: HorizontalView!
     @IBOutlet var star_4_View: HorizontalView!
     @IBOutlet var star_5_View: HorizontalView!
-     
-    @IBOutlet var userRatingCountLabel: UILabel!
     
-    @IBOutlet var main_1_ImageView: CustomImageView!
-    @IBOutlet var main_2_ImageView: CustomImageView!
-    @IBOutlet var main_3_ImageView: CustomImageView!
+    @IBOutlet var userRatingCountLabel: UILabel!
+    @IBOutlet var userRatingLabel: UILabel!
+    
+    @IBOutlet weak var rankingLabel: UILabel!
+    @IBOutlet weak var partLabel: UILabel!
     
     @IBOutlet weak var downloadButton: UIButton!
+    
+    @IBOutlet weak var ageLabel: UILabel!
     
     override func awakeFromNib() {
         starImageArray.append(star_1_View)
@@ -36,18 +38,4 @@ class SearchListTableViewCell: UITableViewCell {
         starImageArray.append(star_4_View)
         starImageArray.append(star_5_View)
     }
-    
-     override func prepareForReuse() {
-        super.prepareForReuse()
-        self.appIconImageView.image = nil
-        self.main_1_ImageView.image = nil
-        self.main_2_ImageView.image = nil
-        self.main_3_ImageView.image = nil
-        
-        self.appIconImageView.loadStop()
-        self.main_1_ImageView.loadStop()
-        self.main_2_ImageView.loadStop()
-        self.main_3_ImageView.loadStop()
-    }
-     
 }

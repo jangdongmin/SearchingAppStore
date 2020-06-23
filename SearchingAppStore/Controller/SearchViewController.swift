@@ -68,10 +68,6 @@ class SearchViewController: UIViewController {
             self.searchController.isActive = false
         }).disposed(by: disposeBag)
          
-//        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
-////            self.keyboardDown()
-//        }).disposed(by: disposeBag)
-        
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
             print("searchBar.rx.text: \($0)")
             self.searchListTableView.isHidden = true
@@ -86,7 +82,6 @@ class SearchViewController: UIViewController {
     }
     
     func setupUI() {
-//        indicator.isHidden = true
         searchListTableView.isHidden = true
         searchListTableView.searchListTableViewDelegate = self
         
@@ -112,6 +107,11 @@ class SearchViewController: UIViewController {
 extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableViewDelegate {
     func detailSelect(appInfo: AppInfo) {
         print("detailSelect = ", appInfo)
+        
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController {
+            vc.appInfo = appInfo
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
 //    func dataMoreLoad(page: Int) {

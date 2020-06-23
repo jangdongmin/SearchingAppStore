@@ -47,7 +47,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
               
             let appInfo = contents[indexPath.row]
             if let averageUserRating = appInfo.averageUserRating {
-                starCheck(cell, averageUserRating)
+                Util.sharedInstance.starCheck(cell.starImageArray, averageUserRating)
             }
             
             if let trackName = appInfo.trackName {
@@ -62,7 +62,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
             }
             
             if let userRatingCount = appInfo.userRatingCount {
-                cell.userRatingCountLabel.text = "\(numberCutting(userRatingCount))"
+                cell.userRatingCountLabel.text = "\(Util.sharedInstance.numberCutting(userRatingCount, small: true))"
             }
              
             if let artworkUrl100 = appInfo.artworkUrl100 {
@@ -90,37 +90,6 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func numberCutting(_ userRatingCount: Int) -> String {
-        if userRatingCount < 1000 {
-            return String(userRatingCount)
-        } else if userRatingCount < 10000 { //천단위
-            let str = Array(String(userRatingCount))
-            return "\(str[0]).\(str[1])천"
-        } else if userRatingCount < 100000 { //만단위
-            let str = Array(String(userRatingCount))
-            return "\(str[0]).\(str[1])만"
-        } else { //만단위 이상
-            let first = userRatingCount / 10000
-            let result = userRatingCount - first * 10000
-            let second = result / 1000
-            return "\(first).\(second)만"
-        }
-    }
-    
-    func starCheck(_ cell: SearchListTableViewCell, _ averageUserRating: Double) {
-        let head = Int(averageUserRating)
-        let tail = averageUserRating.truncatingRemainder(dividingBy: 1)
-        
-        for i in 0..<cell.starImageArray.count {
-            if head > i {
-                cell.starImageArray[i].backgroundColor = .lightGray
-            } else {
-                cell.starImageArray[i].setRating(tail)
-                break
-            }
-        }
-    }
- 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return contents.count
     }

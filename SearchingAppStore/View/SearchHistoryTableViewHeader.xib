@@ -4,6 +4,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -30,8 +31,14 @@
                     <constraint firstItem="p7V-K7-jf4" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="olO-V0-U6D"/>
                 </constraints>
             </tableViewCellContentView>
+            <color key="backgroundColor" name="whiteNBlack"/>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <point key="canvasLocation" x="132" y="154"/>
         </tableViewCell>
     </objects>
+    <resources>
+        <namedColor name="whiteNBlack">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
 </document>
