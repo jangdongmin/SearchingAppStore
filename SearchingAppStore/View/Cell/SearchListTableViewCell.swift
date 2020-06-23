@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchListTableViewCell: UITableViewCell {
-    @IBOutlet var appIconImageView: UIImageView!
+    @IBOutlet var appIconImageView: CustomImageView!
     
     @IBOutlet var appNameLabel: UILabel!
     @IBOutlet var appDescLabel: UILabel!
@@ -34,4 +34,18 @@ class SearchListTableViewCell: UITableViewCell {
         starImageArray.append(star_4_View)
         starImageArray.append(star_5_View)
     }
+    
+     override func prepareForReuse() {
+        super.prepareForReuse()
+        self.appIconImageView.image = nil
+        self.main_1_ImageView.image = nil
+        self.main_2_ImageView.image = nil
+        self.main_3_ImageView.image = nil
+        
+        self.appIconImageView.loadStop()
+        self.main_1_ImageView.loadStop()
+        self.main_2_ImageView.loadStop()
+        self.main_3_ImageView.loadStop()
+    }
+     
 }

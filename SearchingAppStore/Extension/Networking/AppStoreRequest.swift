@@ -14,10 +14,11 @@ class AppStoreRequest: APIRequest {
     var path = "search"
     var parameters = [String: String]()
 
-    init(term: String, limit: String, offset: String) {
+    init(term: String) {
         parameters["term"] = term
         parameters["country"] = "kr"
         parameters["entity"] = "software"
+        parameters["limit"] = "200"
     }
     
 //    init(term: String, limit: String, offset: String) {

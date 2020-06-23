@@ -383,12 +383,17 @@
                                     <constraint firstItem="bND-js-h7A" firstAttribute="centerX" secondItem="cd9-h9-tuJ" secondAttribute="centerX" id="u0A-sM-MB2"/>
                                 </constraints>
                             </view>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="582-t2-muV">
+                                <rect key="frame" x="188.5" y="456.5" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="cd9-h9-tuJ" secondAttribute="bottom" id="1AU-M2-3Ag"/>
                             <constraint firstItem="cd9-h9-tuJ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Bcn-Ld-t2v"/>
+                            <constraint firstItem="582-t2-muV" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Pzs-OR-39n"/>
                             <constraint firstItem="cd9-h9-tuJ" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" id="Utg-nj-550"/>
+                            <constraint firstItem="582-t2-muV" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="r61-c3-mW7"/>
                             <constraint firstItem="cd9-h9-tuJ" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="zfB-Uj-kKK"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -396,6 +401,7 @@
                     <navigationItem key="navigationItem" id="KnW-qL-LOQ"/>
                     <connections>
                         <outlet property="histoyTableView" destination="7Dl-tL-x1a" id="To2-le-T8D"/>
+                        <outlet property="indicator" destination="582-t2-muV" id="1n4-gP-9GM"/>
                         <outlet property="searchListTableView" destination="KaV-5a-STc" id="05h-1C-HYH"/>
                     </connections>
                 </viewController>

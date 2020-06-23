@@ -20,6 +20,8 @@ class SearchViewModel {
     //let requestResult = PublishSubject<AppInfoDict>()
     //let inheritance = PublishSubject<AppInfoDict>()
     
+    let isTableViewHidden = BehaviorRelay<Bool>(value: false)
+    
     func initialSort(text: String) {
         let historyArr = allHistorySubject.value
         

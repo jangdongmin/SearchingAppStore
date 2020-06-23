@@ -16,9 +16,9 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var searchListTableView: SearchListTableView!
     @IBOutlet weak var histoyTableView: SearchHistoryTableView!
-    @IBOutlet weak var searchTextField: UITextField!
     
-    
+    @IBOutlet var indicator: UIActivityIndicatorView!
+     
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "App Store"
@@ -27,7 +27,7 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupBind()
     }
@@ -47,12 +47,11 @@ class SearchViewController: UIViewController {
         
         //검색결과는 이쪽으로 온다.
         viewModel.requestResult.observeOn(MainScheduler.instance).subscribe {
-            self.searchListTableView.isLoading = false
-            
             if let error = $0.error {
                 print("requestResult = ", error)
             } else {
                 self.searchListTableView.isHidden = false
+                self.dataLoadingVisible(isLoading: false)
                 self.searchListTableView.setData(appInfoArr: $0.element ?? [])
             }
         }.disposed(by: disposeBag)
@@ -62,6 +61,7 @@ class SearchViewController: UIViewController {
                 self.viewModel.saveData(text: text)
                 self.viewModel.loadData()
                 
+                self.dataLoadingVisible(isLoading: true)
                 self.viewModel.searchUrl(text: text, page: 0, inheritance: false)
             }
             
@@ -86,6 +86,7 @@ class SearchViewController: UIViewController {
     }
     
     func setupUI() {
+//        indicator.isHidden = true
         searchListTableView.isHidden = true
         searchListTableView.searchListTableViewDelegate = self
         
@@ -98,6 +99,14 @@ class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationController?.navigationBar.prefersLargeTitles = true
     }
+    
+    func dataLoadingVisible(isLoading: Bool) {
+        if isLoading {
+            self.indicator.startAnimating()
+        } else {
+            self.indicator.stopAnimating()
+        }
+    }
 }
 
 extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableViewDelegate {
@@ -105,16 +114,17 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
         print("detailSelect = ", appInfo)
     }
     
-    func dataMoreLoad(page: Int) {
-        if let searchText = self.searchController.searchBar.text {
-            print("dataMoreLoad = ", page)
-            viewModel.searchUrl(text: searchText, page: page, inheritance: true)
-        }
-    }
+//    func dataMoreLoad(page: Int) {
+//        if let searchText = self.searchController.searchBar.text {
+//            print("dataMoreLoad = ", page)
+//            viewModel.searchUrl(text: searchText, page: page, inheritance: true)
+//        }
+//    }
     
     func select(title: String) {
         print("title = ", title)
         self.searchController.searchBar.text = title
+        dataLoadingVisible(isLoading: true)
         viewModel.searchUrl(text: title, page: 0, inheritance: false)
     }
 }

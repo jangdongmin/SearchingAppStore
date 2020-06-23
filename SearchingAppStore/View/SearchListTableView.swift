@@ -10,13 +10,13 @@ import UIKit
 
 protocol SearchListTableViewDelegate {
     func detailSelect(appInfo: AppInfo)
-    func dataMoreLoad(page: Int)
+//    func dataMoreLoad(page: Int)
 }
 
 class SearchListTableView: UITableView {
     var page: Int = 0
     var contents: [AppInfo] = []
-    var isLoading = false
+    //var isLoading = false
     
     var searchListTableViewDelegate: SearchListTableViewDelegate?
     
@@ -44,7 +44,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchListTableViewCell.self), for: indexPath) as? SearchListTableViewCell {
-             
+              
             let appInfo = contents[indexPath.row]
             if let averageUserRating = appInfo.averageUserRating {
                 starCheck(cell, averageUserRating)
@@ -67,21 +67,21 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
              
             if let artworkUrl100 = appInfo.artworkUrl100 {
                 if let imgUrl = URL(string: artworkUrl100) {
-                    cell.appIconImageView.load(url: imgUrl, placeholder: nil)
+                    cell.appIconImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
             }
-            
+             
             if let screenshotUrls = appInfo.screenshotUrls {
                 if let imgUrl = URL(string: screenshotUrls[0]) {
-                    cell.main_1_ImageView.load(url: imgUrl, placeholder: nil)
+                    cell.main_1_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
                 
                 if let imgUrl = URL(string: screenshotUrls[1]) {
-                    cell.main_2_ImageView.load(url: imgUrl, placeholder: nil)
+                    cell.main_2_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
                 
                 if let imgUrl = URL(string: screenshotUrls[2]) {
-                    cell.main_3_ImageView.load(url: imgUrl, placeholder: nil)
+                    cell.main_3_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
             }
             
@@ -126,18 +126,18 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension SearchListTableView {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let currentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
-        if maximumOffset - currentOffset <= 20.0 && maximumOffset > 0 {
-            if !isLoading {
-                print("reload")
-                isLoading = true
-                
-                self.page += 1
-                self.searchListTableViewDelegate?.dataMoreLoad(page: self.page)
-            }
-        }
-    }
-}
+//extension SearchListTableView {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        let currentOffset = scrollView.contentOffset.y
+//        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height
+//        if maximumOffset - currentOffset <= 20.0 && maximumOffset > 0 {
+//            if !isLoading {
+//                print("reload")
+//                isLoading = true
+//
+//                self.page += 1
+//                self.searchListTableViewDelegate?.dataMoreLoad(page: self.page)
+//            }
+//        }
+//    }
+//}

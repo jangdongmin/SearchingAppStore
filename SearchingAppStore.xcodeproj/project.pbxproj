@@ -17,14 +17,14 @@
 		09F388C7249F019D0046DC6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F388C5249F019D0046DC6A /* Main.storyboard */; };
 		09F388C9249F019E0046DC6A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09F388C8249F019E0046DC6A /* Assets.xcassets */; };
 		09F388CC249F019E0046DC6A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F388CA249F019E0046DC6A /* LaunchScreen.storyboard */; };
-		09F388DB249F06B10046DC6A /* Extension+UIVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DA249F06B10046DC6A /* Extension+UIVIew.swift */; };
+		09F388DB249F06B10046DC6A /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DA249F06B10046DC6A /* CustomView.swift */; };
 		09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */; };
 		09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */; };
 		09F388E6249F3D620046DC6A /* SearchHistoryTableViewHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */; };
 		09F388E8249F53F90046DC6A /* AppInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388E7249F53F90046DC6A /* AppInfo.swift */; };
 		09F388EA249F55520046DC6A /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388E9249F55520046DC6A /* SearchViewModel.swift */; };
 		52612A440B3D519BC6B14EB4 /* libPods-SearchingAppStore.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5A5DE8319CEA959F41D1F008 /* libPods-SearchingAppStore.a */; };
-		58357B9624A1C3F600484EA0 /* UIImageView+Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58357B9524A1C3F600484EA0 /* UIImageView+Cache.swift */; };
+		58357B9C24A217BC00484EA0 /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58357B9B24A217BC00484EA0 /* CustomImageView.swift */; };
 		58DBA8D924A0629A00EAAA87 /* HorizontalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58DBA8D824A0629A00EAAA87 /* HorizontalView.swift */; };
 /* End PBXBuildFile section */
 
@@ -41,13 +41,13 @@
 		09F388C8249F019E0046DC6A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09F388CB249F019E0046DC6A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09F388CD249F019E0046DC6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		09F388DA249F06B10046DC6A /* Extension+UIVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+UIVIew.swift"; sourceTree = "<group>"; };
+		09F388DA249F06B10046DC6A /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableView.swift; sourceTree = "<group>"; };
 		09F388DF249F15B90046DC6A /* SearchHistoryTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchHistoryTableViewCell.swift; sourceTree = "<group>"; };
 		09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SearchHistoryTableViewHeader.xib; sourceTree = "<group>"; };
 		09F388E7249F53F90046DC6A /* AppInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfo.swift; sourceTree = "<group>"; };
 		09F388E9249F55520046DC6A /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
-		58357B9524A1C3F600484EA0 /* UIImageView+Cache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImageView+Cache.swift"; sourceTree = "<group>"; };
+		58357B9B24A217BC00484EA0 /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		58DBA8D824A0629A00EAAA87 /* HorizontalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HorizontalView.swift; sourceTree = "<group>"; };
 		5A5DE8319CEA959F41D1F008 /* libPods-SearchingAppStore.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-SearchingAppStore.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7162540DB99D37CF46AA4CC3 /* Pods-SearchingAppStore.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchingAppStore.release.xcconfig"; path = "Target Support Files/Pods-SearchingAppStore/Pods-SearchingAppStore.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 			isa = PBXGroup;
 			children = (
 				0955B89624A10C9100CF672A /* Cell */,
-				0949B5AD249FC1F6009D167E /* SearchListTableView.swift */,
 				58DBA8D824A0629A00EAAA87 /* HorizontalView.swift */,
+				0949B5AD249FC1F6009D167E /* SearchListTableView.swift */,
 				09F388DD249F158C0046DC6A /* SearchHistoryTableView.swift */,
 				09F388E5249F3D620046DC6A /* SearchHistoryTableViewHeader.xib */,
 			);
@@ -176,8 +176,8 @@
 			isa = PBXGroup;
 			children = (
 				0955B89524A10A9D00CF672A /* Networking */,
-				09F388DA249F06B10046DC6A /* Extension+UIVIew.swift */,
-				58357B9524A1C3F600484EA0 /* UIImageView+Cache.swift */,
+				09F388DA249F06B10046DC6A /* CustomView.swift */,
+				58357B9B24A217BC00484EA0 /* CustomImageView.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -309,14 +309,14 @@
 				0949B5AF249FC1F6009D167E /* SearchListTableView.swift in Sources */,
 				09F388EA249F55520046DC6A /* SearchViewModel.swift in Sources */,
 				09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */,
+				58357B9C24A217BC00484EA0 /* CustomImageView.swift in Sources */,
 				0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */,
 				0949B5A7249F8F7D009D167E /* APIRequest.swift in Sources */,
 				58DBA8D924A0629A00EAAA87 /* HorizontalView.swift in Sources */,
 				09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */,
 				09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */,
-				09F388DB249F06B10046DC6A /* Extension+UIVIew.swift in Sources */,
+				09F388DB249F06B10046DC6A /* CustomView.swift in Sources */,
 				0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */,
-				58357B9624A1C3F600484EA0 /* UIImageView+Cache.swift in Sources */,
 				09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */,
 				0949B5A9249F9426009D167E /* APIClient.swift in Sources */,
 			);
