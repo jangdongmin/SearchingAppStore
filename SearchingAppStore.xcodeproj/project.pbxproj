@@ -22,6 +22,9 @@
 		094C1E3624A3920400356613 /* SearchHistoryTableView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C1E3524A3920400356613 /* SearchHistoryTableView.xib */; };
 		094C1E3A24A396B500356613 /* SearchHistoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C1E3924A396B400356613 /* SearchHistoryTableViewCell.xib */; };
 		094C1E3C24A3977600356613 /* SearchListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094C1E3B24A3977600356613 /* SearchListTableViewCell.xib */; };
+		094C1E4024A3B1AA00356613 /* ScreenShotCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C1E3F24A3B1AA00356613 /* ScreenShotCell.swift */; };
+		094C1E4224A3B2A300356613 /* ScreenShotCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C1E4124A3B2A300356613 /* ScreenShotCollectionView.swift */; };
+		094C1E4424A3B5DE00356613 /* ScreenShotCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094C1E4324A3B5DE00356613 /* ScreenShotCollectionViewCell.swift */; };
 		09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388BF249F019D0046DC6A /* AppDelegate.swift */; };
 		09F388C4249F019D0046DC6A /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09F388C3249F019D0046DC6A /* SearchViewController.swift */; };
 		09F388C7249F019D0046DC6A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09F388C5249F019D0046DC6A /* Main.storyboard */; };
@@ -54,6 +57,9 @@
 		094C1E3524A3920400356613 /* SearchHistoryTableView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryTableView.xib; sourceTree = "<group>"; };
 		094C1E3924A396B400356613 /* SearchHistoryTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchHistoryTableViewCell.xib; sourceTree = "<group>"; };
 		094C1E3B24A3977600356613 /* SearchListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchListTableViewCell.xib; sourceTree = "<group>"; };
+		094C1E3F24A3B1AA00356613 /* ScreenShotCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCell.swift; sourceTree = "<group>"; };
+		094C1E4124A3B2A300356613 /* ScreenShotCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCollectionView.swift; sourceTree = "<group>"; };
+		094C1E4324A3B5DE00356613 /* ScreenShotCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenShotCollectionViewCell.swift; sourceTree = "<group>"; };
 		09F388BC249F019D0046DC6A /* SearchingAppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchingAppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09F388BF249F019D0046DC6A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09F388C3249F019D0046DC6A /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +127,7 @@
 			children = (
 				094C1E3E24A3A95600356613 /* Cell */,
 				094B384924A23D07009B4C16 /* DetailTableView.swift */,
+				094C1E4124A3B2A300356613 /* ScreenShotCollectionView.swift */,
 			);
 			path = Detail;
 			sourceTree = "<group>";
@@ -130,6 +137,8 @@
 			children = (
 				094B384B24A23D9B009B4C16 /* TitleCell.swift */,
 				094B385124A25C34009B4C16 /* RealseNoteCell.swift */,
+				094C1E3F24A3B1AA00356613 /* ScreenShotCell.swift */,
+				094C1E4324A3B5DE00356613 /* ScreenShotCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -373,12 +382,15 @@
 				0949B5AB249F9450009D167E /* AppStoreRequest.swift in Sources */,
 				094B384A24A23D07009B4C16 /* DetailTableView.swift in Sources */,
 				0949B5A7249F8F7D009D167E /* APIRequest.swift in Sources */,
+				094C1E4424A3B5DE00356613 /* ScreenShotCollectionViewCell.swift in Sources */,
 				58DBA8D924A0629A00EAAA87 /* HorizontalView.swift in Sources */,
 				09F388C0249F019D0046DC6A /* AppDelegate.swift in Sources */,
 				09F388DE249F158C0046DC6A /* SearchHistoryTableView.swift in Sources */,
 				09F388DB249F06B10046DC6A /* CustomView.swift in Sources */,
 				0949B5AE249FC1F6009D167E /* SearchListTableViewCell.swift in Sources */,
 				094B384824A23C55009B4C16 /* DetailViewController.swift in Sources */,
+				094C1E4224A3B2A300356613 /* ScreenShotCollectionView.swift in Sources */,
+				094C1E4024A3B1AA00356613 /* ScreenShotCell.swift in Sources */,
 				094B384C24A23D9B009B4C16 /* TitleCell.swift in Sources */,
 				094B385224A25C34009B4C16 /* RealseNoteCell.swift in Sources */,
 				09F388E0249F15B90046DC6A /* SearchHistoryTableViewCell.swift in Sources */,

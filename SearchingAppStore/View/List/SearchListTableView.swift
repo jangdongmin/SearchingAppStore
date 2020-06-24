@@ -44,8 +44,8 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return UITableView.automaticDimension
-        return 350
+        return UITableView.automaticDimension
+//        return 350
     }
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -85,6 +85,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
                 
                 if let imgUrl = URL(string: screenshotUrls[1]) {
                     cell.main_2_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                    //print("cell.main_2_ImageView = ", cell.main_2_ImageView.frame.size.height)
                 }
                 
                 if let imgUrl = URL(string: screenshotUrls[2]) {

@@ -19,15 +19,15 @@ class RealseNoteCell: UITableViewCell {
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var releaseNoteLabel: UILabel!
     @IBOutlet weak var moreButton: UIButton!
+    var moreButtonClick = false
+
+    override func awakeFromNib() {
+    }
     
     @IBAction func moreButtonClick(_ sender: Any) {
         releaseNoteLabel.numberOfLines = 0
         moreButton.isHidden = true
-        
+        moreButtonClick = true
         realseNoteCellDelegate?.moreButtonClick(sender)
-        
-//        let indexPath = IndexPath(item: rowNumber, section: 0)
-//        tableView.reloadRows(at: [indexPath], with: .top)
-//        self.layoutIfNeeded()
     }
 }

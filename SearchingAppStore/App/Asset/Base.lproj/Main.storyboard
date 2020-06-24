@@ -6,6 +6,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -465,6 +466,78 @@
                                                             <outlet property="releaseNoteLabel" destination="ftn-ft-HhS" id="XJg-Dm-Vpv"/>
                                                             <outlet property="timeLabel" destination="BL6-wU-I30" id="o1C-ma-aG7"/>
                                                             <outlet property="versionLabel" destination="Hmu-Q2-n8a" id="a6r-vo-vpG"/>
+                                                        </connections>
+                                                    </tableViewCell>
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ScreenShotCell" id="V6L-Pg-J2N" customClass="ScreenShotCell" customModule="SearchingAppStore" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="415.5" width="384" height="531.5"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="V6L-Pg-J2N" id="8Df-PK-7vS">
+                                                            <rect key="frame" x="0.0" y="0.0" width="384" height="531.5"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="미리보기" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMw-4p-FGh">
+                                                                    <rect key="frame" x="0.0" y="15" width="76.5" height="26.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="bFt-9B-Xdz" customClass="ScreenShotCollectionView" customModule="SearchingAppStore" customModuleProvider="target">
+                                                                    <rect key="frame" x="0.0" y="51.5" width="384" height="480"/>
+                                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="480" id="uMQ-54-leR"/>
+                                                                    </constraints>
+                                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="UwD-ZK-5kC" customClass="SnappingLayout" customModule="SearchingAppStore" customModuleProvider="target">
+                                                                        <size key="itemSize" width="128" height="128"/>
+                                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                    </collectionViewFlowLayout>
+                                                                    <cells>
+                                                                        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ScreenShotCollectionViewCell" id="ikf-Xy-zJS" customClass="ScreenShotCollectionViewCell" customModule="SearchingAppStore" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                            <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="aUC-8X-rfh">
+                                                                                <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                                <subviews>
+                                                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qlK-JS-BTH" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
+                                                                                        <rect key="frame" x="0.0" y="0.0" width="128" height="113"/>
+                                                                                        <constraints>
+                                                                                            <constraint firstAttribute="width" constant="220" id="to9-LH-R6m"/>
+                                                                                        </constraints>
+                                                                                        <userDefinedRuntimeAttributes>
+                                                                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
+                                                                                                <real key="value" value="10"/>
+                                                                                            </userDefinedRuntimeAttribute>
+                                                                                        </userDefinedRuntimeAttributes>
+                                                                                    </imageView>
+                                                                                </subviews>
+                                                                                <constraints>
+                                                                                    <constraint firstItem="qlK-JS-BTH" firstAttribute="leading" secondItem="aUC-8X-rfh" secondAttribute="leading" id="AJ8-oB-DX1"/>
+                                                                                    <constraint firstAttribute="bottom" secondItem="qlK-JS-BTH" secondAttribute="bottom" constant="15" id="Bkf-uA-D9g"/>
+                                                                                    <constraint firstAttribute="trailing" secondItem="qlK-JS-BTH" secondAttribute="trailing" id="SjQ-Wt-51K"/>
+                                                                                    <constraint firstItem="qlK-JS-BTH" firstAttribute="top" secondItem="aUC-8X-rfh" secondAttribute="top" id="obD-BP-hQu"/>
+                                                                                </constraints>
+                                                                            </collectionViewCellContentView>
+                                                                            <connections>
+                                                                                <outlet property="screenShotImageVIew" destination="qlK-JS-BTH" id="09i-w5-trn"/>
+                                                                            </connections>
+                                                                        </collectionViewCell>
+                                                                    </cells>
+                                                                </collectionView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="bottom" secondItem="bFt-9B-Xdz" secondAttribute="bottom" id="CXN-Ob-m6p"/>
+                                                                <constraint firstItem="bFt-9B-Xdz" firstAttribute="leading" secondItem="8Df-PK-7vS" secondAttribute="leading" id="SRV-4v-WYo"/>
+                                                                <constraint firstItem="iMw-4p-FGh" firstAttribute="top" secondItem="8Df-PK-7vS" secondAttribute="top" constant="15" id="Vjm-Jc-1u2"/>
+                                                                <constraint firstItem="iMw-4p-FGh" firstAttribute="leading" secondItem="8Df-PK-7vS" secondAttribute="leading" id="cDx-ks-ya2"/>
+                                                                <constraint firstItem="bFt-9B-Xdz" firstAttribute="top" secondItem="iMw-4p-FGh" secondAttribute="bottom" constant="10" id="kX7-0q-Usd"/>
+                                                                <constraint firstAttribute="trailing" secondItem="bFt-9B-Xdz" secondAttribute="trailing" id="uQh-3x-KiO"/>
+                                                            </constraints>
+                                                        </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="screenShotCollectionView" destination="bFt-9B-Xdz" id="bMk-OU-Ybr"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>

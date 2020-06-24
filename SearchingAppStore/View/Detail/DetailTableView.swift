@@ -9,7 +9,15 @@
 import UIKit
 
 class DetailTableView: UITableView {
+   
+    enum CellName: String {
+        case AppTitle = "appTitle"
+        case ReleaseNote = "releaseNote"
+        case ScreenShot = "screenShot"
+    }
+    
     var appInfo: AppInfo?
+    var path = [Int:String]()
     
     override func awakeFromNib() {
         self.delegate = self
@@ -18,6 +26,17 @@ class DetailTableView: UITableView {
     
     public func setData(appInfo: AppInfo) {
         self.appInfo = appInfo
+        path.removeAll()
+        
+        if appInfo.releaseNotes != nil {
+            path[0] = CellName.AppTitle.rawValue
+            path[1] = CellName.ReleaseNote.rawValue
+            path[2] = CellName.ScreenShot.rawValue
+        } else {
+            path[0] = CellName.AppTitle.rawValue
+            path[1] = CellName.ScreenShot.rawValue
+        }
+        
         self.reloadData()
     }
 }
@@ -29,8 +48,21 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
     }
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: TitleCell.self), for: indexPath) as? TitleCell {
+         
+        return setDetailCell(indexPath)
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return path.count
+    }
+    
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 2
+//    }
+    
+    func setDetailCell(_ indexPath: IndexPath) -> UITableViewCell {
+        if path[indexPath.row] == CellName.AppTitle.rawValue {
+            if let cell = self.dequeueReusableCell(withIdentifier: String(describing: TitleCell.self), for: indexPath) as? TitleCell {
                 
                 if let averageUserRating = appInfo?.averageUserRating {
                     Util.sharedInstance.starCheck(cell.starImageArray, averageUserRating)
@@ -65,60 +97,57 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                 
                 return cell
             }
-        } else if indexPath.section == 1 {
-            if let releaseNotes = appInfo?.releaseNotes {
-                if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RealseNoteCell.self), for: indexPath) as? RealseNoteCell {
+        } else if path[indexPath.row] == CellName.ReleaseNote.rawValue {
+            if let cell = self.dequeueReusableCell(withIdentifier: String(describing: RealseNoteCell.self), for: indexPath) as? RealseNoteCell {
+                
+                cell.realseNoteCellDelegate = self
 
-                    cell.realseNoteCellDelegate = self
-                    cell.tag = indexPath.row
-                    
-                    cell.timeLabel.text = ""
-                    cell.versionLabel.text = ""
-                    cell.releaseNoteLabel.text = releaseNotes
-                    
-                    print("actualNumberOfLines = ", cell.releaseNoteLabel.actualNumberOfLines)
-                    if cell.releaseNoteLabel.actualNumberOfLines > 3 {
-                        cell.moreButton.isHidden = false
-                    } else {
-                        cell.moreButton.isHidden = true
-                    }
-                    
-                    if let version = appInfo?.version {
-                        cell.versionLabel.text = "버전 \(version)"
-                    }
-                    
-                    if let currentVersionReleaseDate = appInfo?.currentVersionReleaseDate {
-                        if let releaseDate = Util.sharedInstance.getDate(date: currentVersionReleaseDate) {
-                            if let dateCompare = Util.sharedInstance.dateCompare(fromDate: releaseDate, to: Date()) {
-                                cell.timeLabel.text = Util.sharedInstance.dateConvert(component: dateCompare)
-                            }
+                cell.timeLabel.text = ""
+                cell.versionLabel.text = ""
+                cell.releaseNoteLabel.text = appInfo?.releaseNotes
+                
+                print("actualNumberOfLines = ", cell.releaseNoteLabel.actualNumberOfLines)
+                if cell.releaseNoteLabel.actualNumberOfLines > 2 && !cell.moreButtonClick {
+                    cell.moreButton.isHidden = false
+                } else {
+                    cell.moreButton.isHidden = true
+                }
+                
+                if let version = appInfo?.version {
+                    cell.versionLabel.text = "버전 \(version)"
+                }
+                
+                if let currentVersionReleaseDate = appInfo?.currentVersionReleaseDate {
+                    if let releaseDate = Util.sharedInstance.getDate(date: currentVersionReleaseDate) {
+                        if let dateCompare = Util.sharedInstance.dateCompare(fromDate: releaseDate, to: Date()) {
+                            cell.timeLabel.text = Util.sharedInstance.dateConvert(component: dateCompare)
                         }
                     }
-                    
-                    return cell
                 }
-            } else {
                 
+                return cell
+            }
+        } else if path[indexPath.row] == CellName.ScreenShot.rawValue {
+            if let cell = self.dequeueReusableCell(withIdentifier: String(describing: ScreenShotCell.self), for: indexPath) as? ScreenShotCell {
+                
+                if let appInfo = appInfo {
+                    cell.screenShotCollectionView.setData(appInfo: appInfo)
+                }
+                
+                return cell
             }
         }
         
         return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
     }
 }
 
 extension DetailTableView: RealseNoteCellDelegate {
     func moreButtonClick(_ sender: Any) {
         print("moreButtonClick")
-        let indexPath = IndexPath(item: 0, section: 1)
-        self.reloadRows(at: [indexPath], with: .top)
+        //let indexPath = IndexPath(item: 0, section: 1)
+        //self.reloadRows(at: [indexPath], with: .none)
+        self.reloadData()
     }
 }
 
