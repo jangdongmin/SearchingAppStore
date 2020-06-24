@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SearchHistoryTableViewDelegate {
-    func select(title: String)
+    func historySelect(title: String)
 }
 
 class SearchHistoryTableView: UITableView {
@@ -24,7 +24,7 @@ class SearchHistoryTableView: UITableView {
         
         setupUI()
     }
-    
+     
     public func setData(strArr: [String], initial: Bool) {
         contents = strArr
         self.initial = initial
@@ -41,12 +41,15 @@ class SearchHistoryTableView: UITableView {
     private func setupUI() {
         let loadingCellNib = UINib(nibName: "SearchHistoryTableViewHeader", bundle: nil)
         self.register(loadingCellNib, forCellReuseIdentifier: "SearchHistoryTableViewHeader")
+         
+        let nib = UINib(nibName: String(describing: SearchHistoryTableViewCell.self), bundle: nil)
+        self.register(nib, forCellReuseIdentifier: String(describing: SearchHistoryTableViewCell.self))
     }
 }
 
 extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        historyTableViewDelegate?.select(title: contents[indexPath.row])
+        historyTableViewDelegate?.historySelect(title: contents[indexPath.row])
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

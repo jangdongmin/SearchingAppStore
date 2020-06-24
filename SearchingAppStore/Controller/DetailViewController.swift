@@ -20,7 +20,6 @@ class DetailViewController: UIViewController {
     }
     
     func setupUI() {
-        navigationItem.largeTitleDisplayMode = .never
         if let info = appInfo {
             detailTableView.setData(appInfo: info)
         }
@@ -29,4 +28,5 @@ class DetailViewController: UIViewController {
     func setupBind() {
         
     }
+    
 }

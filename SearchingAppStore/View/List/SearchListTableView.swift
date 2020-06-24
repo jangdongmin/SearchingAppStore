@@ -23,11 +23,18 @@ class SearchListTableView: UITableView {
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
+        
+        setupUI()
     }
     
     public func setData(appInfoArr: [AppInfo]) {
         contents = appInfoArr
         self.reloadData()
+    }
+    
+    private func setupUI() {
+        let nib = UINib(nibName: String(describing: SearchListTableViewCell.self), bundle: nil)
+        self.register(nib, forCellReuseIdentifier: String(describing: SearchListTableViewCell.self))
     }
 }
 
@@ -44,7 +51,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchListTableViewCell.self), for: indexPath) as? SearchListTableViewCell {
-              
+             
             let appInfo = contents[indexPath.row]
             if let averageUserRating = appInfo.averageUserRating {
                 Util.sharedInstance.starCheck(cell.starImageArray, averageUserRating)
@@ -65,8 +72,8 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.userRatingCountLabel.text = "\(Util.sharedInstance.numberCutting(userRatingCount, small: true))"
             }
              
-            if let artworkUrl100 = appInfo.artworkUrl100 {
-                if let imgUrl = URL(string: artworkUrl100) {
+            if let artworkUrl60 = appInfo.artworkUrl60 {
+                if let imgUrl = URL(string: artworkUrl60) {
                     cell.appIconImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
             }

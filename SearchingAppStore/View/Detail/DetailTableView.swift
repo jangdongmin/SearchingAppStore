@@ -41,8 +41,8 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                     cell.userRatingCountLabel.text = "\(Util.sharedInstance.numberCutting(userRatingCount, small: false))"
                 }
                 
-                if let artworkUrl512 = appInfo?.artworkUrl512 {
-                    if let imgUrl = URL(string: artworkUrl512) {
+                if let artworkUrl100 = appInfo?.artworkUrl100 {
+                    if let imgUrl = URL(string: artworkUrl100) {
                         cell.appIconImageView.loadImageTask(url: imgUrl, placeholder: nil)
                     }
                 }
@@ -62,20 +62,39 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                 if let sellerName = appInfo?.sellerName {
                     cell.appDescLabel.text = sellerName
                 }
-                print(cell.frame.size.height)
+                
                 return cell
             }
         } else if indexPath.section == 1 {
             if let releaseNotes = appInfo?.releaseNotes {
                 if let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: RealseNoteCell.self), for: indexPath) as? RealseNoteCell {
+
+                    cell.realseNoteCellDelegate = self
+                    cell.tag = indexPath.row
                     
+                    cell.timeLabel.text = ""
+                    cell.versionLabel.text = ""
                     cell.releaseNoteLabel.text = releaseNotes
+                    
+                    print("actualNumberOfLines = ", cell.releaseNoteLabel.actualNumberOfLines)
+                    if cell.releaseNoteLabel.actualNumberOfLines > 3 {
+                        cell.moreButton.isHidden = false
+                    } else {
+                        cell.moreButton.isHidden = true
+                    }
                     
                     if let version = appInfo?.version {
                         cell.versionLabel.text = "버전 \(version)"
                     }
                     
-                    print(cell.frame.size.height)
+                    if let currentVersionReleaseDate = appInfo?.currentVersionReleaseDate {
+                        if let releaseDate = Util.sharedInstance.getDate(date: currentVersionReleaseDate) {
+                            if let dateCompare = Util.sharedInstance.dateCompare(fromDate: releaseDate, to: Date()) {
+                                cell.timeLabel.text = Util.sharedInstance.dateConvert(component: dateCompare)
+                            }
+                        }
+                    }
+                    
                     return cell
                 }
             } else {
@@ -85,7 +104,7 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
         
         return UITableViewCell()
     }
-     
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
@@ -93,7 +112,14 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
+}
 
+extension DetailTableView: RealseNoteCellDelegate {
+    func moreButtonClick(_ sender: Any) {
+        print("moreButtonClick")
+        let indexPath = IndexPath(item: 0, section: 1)
+        self.reloadRows(at: [indexPath], with: .top)
+    }
 }
 
 extension Double {

@@ -14,9 +14,15 @@ class SearchViewController: UIViewController {
     let viewModel = SearchViewModel()
     let disposeBag = DisposeBag()
     
-    @IBOutlet weak var searchListTableView: SearchListTableView!
-    @IBOutlet weak var histoyTableView: SearchHistoryTableView!
-    
+    enum ViewingList: Int {
+        case History = 0
+        case AppList = 1
+    }
+     
+    @IBOutlet weak var contentView: UIView!
+    var searchListTableView: SearchListTableView?
+    var histoyTableView: SearchHistoryTableView?
+
     @IBOutlet var indicator: UIActivityIndicatorView!
      
     private let searchController: UISearchController = {
@@ -36,13 +42,13 @@ class SearchViewController: UIViewController {
         //최근 검색어 - 전체
         viewModel.allHistorySubject.asObservable().subscribe {
             print("allHistorySubject = ", $0)
-            self.histoyTableView.setData(strArr: $0.element ?? [], initial: false)
+            self.histoyTableView?.setData(strArr: $0.element ?? [], initial: false)
         }.disposed(by: disposeBag)
         
         //search bar에서 검색했을때
         viewModel.sortHistorySubject.asObservable().subscribe {
             print("sortHistorySubject = ", $0)
-            self.histoyTableView.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
+            self.histoyTableView?.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
         //검색결과는 이쪽으로 온다.
@@ -50,9 +56,9 @@ class SearchViewController: UIViewController {
             if let error = $0.error {
                 print("requestResult = ", error)
             } else {
-                self.searchListTableView.isHidden = false
+                self.listShowing(index: ViewingList.AppList.rawValue)
                 self.dataLoadingVisible(isLoading: false)
-                self.searchListTableView.setData(appInfoArr: $0.element ?? [])
+                self.searchListTableView?.setData(appInfoArr: $0.element ?? [])
             }
         }.disposed(by: disposeBag)
          
@@ -70,9 +76,13 @@ class SearchViewController: UIViewController {
          
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
             print("searchBar.rx.text: \($0)")
-            self.searchListTableView.isHidden = true
+            
+            self.listShowing(index: ViewingList.History.rawValue)
+            
             if $0 == "" {
-                self.histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
+                if let histoyTableView = self.histoyTableView {
+                    histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
+                }
             } else {
                 self.viewModel.initialSort(text: $0)
             }
@@ -82,17 +92,50 @@ class SearchViewController: UIViewController {
     }
     
     func setupUI() {
-        searchListTableView.isHidden = true
-        searchListTableView.searchListTableViewDelegate = self
-        
-        histoyTableView.historyTableViewDelegate = self
+        listShowing(index: ViewingList.History.rawValue)
         
         searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
         searchController.dimsBackgroundDuringPresentation = false
+        
         navigationItem.searchController = searchController
         navigationItem.title = "검색"
         navigationItem.hidesSearchBarWhenScrolling = false
+        
         navigationController?.navigationBar.prefersLargeTitles = true
+    }
+    
+    func listShowing(index: Int) {
+        print("listShowing = ", index)
+
+        if let tableView = self.histoyTableView {
+            tableView.removeFromSuperview()
+        }
+        
+        if let tableView = self.searchListTableView {
+            tableView.removeFromSuperview()
+        }
+
+        if index == ViewingList.History.rawValue {
+            if let tableView = loadXib(type: SearchHistoryTableView.self) as? SearchHistoryTableView {
+                histoyTableView = tableView
+                tableView.historyTableViewDelegate = self
+                contentView.addSubview(tableView)
+            }
+        } else {
+            if let tableView = loadXib(type: SearchListTableView.self) as? SearchListTableView {
+                searchListTableView = tableView
+                tableView.searchListTableViewDelegate = self
+                contentView.addSubview(tableView)
+            }
+        }
+    }
+    
+    func loadXib(type: Any) -> UITableView? {
+        guard let loadedNib = Bundle.main.loadNibNamed(String(describing: type), owner: self, options: nil) else { return nil }
+        guard let tableView = loadedNib.first as? UITableView else { return nil }
+        tableView.frame = contentView.bounds
+        tableView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        return tableView
     }
     
     func dataLoadingVisible(isLoading: Bool) {
@@ -114,18 +157,22 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
         }
     }
     
+    func historySelect(title: String) {
+        print("historySelect = ", title)
+        self.searchController.resignFirstResponder()
+        searchListTableView?.setContentOffset(.zero, animated: false)
+        
+        self.searchController.searchBar.text = title
+        dataLoadingVisible(isLoading: true)
+        viewModel.searchUrl(text: title, page: 0, inheritance: false)
+    }
+
 //    func dataMoreLoad(page: Int) {
 //        if let searchText = self.searchController.searchBar.text {
 //            print("dataMoreLoad = ", page)
 //            viewModel.searchUrl(text: searchText, page: page, inheritance: true)
 //        }
 //    }
-    
-    func select(title: String) {
-        print("title = ", title)
-        self.searchController.searchBar.text = title
-        dataLoadingVisible(isLoading: true)
-        viewModel.searchUrl(text: title, page: 0, inheritance: false)
-    }
+        
 }
  

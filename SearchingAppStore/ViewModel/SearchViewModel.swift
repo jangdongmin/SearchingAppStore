@@ -16,11 +16,11 @@ class SearchViewModel {
     let allHistorySubject = BehaviorRelay(value: [""])
     let sortHistorySubject = BehaviorRelay(value: [""])
     
-    let requestResult = BehaviorRelay(value: [AppInfo]())
-    //let requestResult = PublishSubject<AppInfoDict>()
+//    let requestResult = BehaviorRelay(value: [AppInfo]())
+    let requestResult = PublishSubject<[AppInfo]>()
     //let inheritance = PublishSubject<AppInfoDict>()
     
-    let isTableViewHidden = BehaviorRelay<Bool>(value: false)
+    //let isTableViewHidden = BehaviorRelay<Bool>(value: false)
     
     func initialSort(text: String) {
         let historyArr = allHistorySubject.value
@@ -60,13 +60,17 @@ class SearchViewModel {
         let observer: Observable<AppInfoDict> = self.apiClient.send(apiRequest: AppStoreRequest(term: text.lowercased()))
         observer.subscribe(onNext: {
             //print($0)
-            if inheritance {
-                var results = self.requestResult.value
-                results.append(contentsOf: $0.results)
-                self.requestResult.accept(results)
-            } else {
-                self.requestResult.accept($0.results)
-            }
+//            if inheritance {
+//                var results = self.requestResult.value
+//                results.append(contentsOf: $0.results)
+//                self.requestResult.accept(results)
+//            } else {
+//                self.requestResult.accept($0.results)
+//            }
+            
+            
+            self.requestResult.onNext($0.results)
+            
             
 //            for i in 0..<$0.resultCount {
 //                if let url = $0.results[i].trackViewUrl {
