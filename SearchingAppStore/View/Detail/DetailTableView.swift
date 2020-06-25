@@ -14,6 +14,9 @@ class DetailTableView: UITableView {
         case AppTitle = "appTitle"
         case ReleaseNote = "releaseNote"
         case ScreenShot = "screenShot"
+        case Description = "description"
+        case Developer = "developer"
+        case Evaluate = "evaluate"
     }
     
     var appInfo: AppInfo?
@@ -32,9 +35,15 @@ class DetailTableView: UITableView {
             path[0] = CellName.AppTitle.rawValue
             path[1] = CellName.ReleaseNote.rawValue
             path[2] = CellName.ScreenShot.rawValue
+            path[3] = CellName.Description.rawValue
+            path[4] = CellName.Developer.rawValue
+            path[5] = CellName.Evaluate.rawValue
         } else {
             path[0] = CellName.AppTitle.rawValue
             path[1] = CellName.ScreenShot.rawValue
+            path[2] = CellName.Description.rawValue
+            path[3] = CellName.Developer.rawValue
+            path[4] = CellName.Evaluate.rawValue
         }
         
         self.reloadData()
@@ -106,7 +115,6 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.versionLabel.text = ""
                 cell.releaseNoteLabel.text = appInfo?.releaseNotes
                 
-                print("actualNumberOfLines = ", cell.releaseNoteLabel.actualNumberOfLines)
                 if cell.releaseNoteLabel.actualNumberOfLines > 2 && !cell.moreButtonClick {
                     cell.moreButton.isHidden = false
                 } else {
@@ -130,10 +138,47 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
         } else if path[indexPath.row] == CellName.ScreenShot.rawValue {
             if let cell = self.dequeueReusableCell(withIdentifier: String(describing: ScreenShotCell.self), for: indexPath) as? ScreenShotCell {
                 
-                if let appInfo = appInfo {
-                    cell.screenShotCollectionView.setData(appInfo: appInfo)
+                if let screenshotUrls = appInfo?.screenshotUrls {
+                    cell.screenShotCollectionView.setData(screenshotUrls: screenshotUrls)
+                    if let ipadScreenshotUrls = appInfo?.ipadScreenshotUrls {
+                        if ipadScreenshotUrls.count > 0 {
+                            cell.screenShotCellDelegate = self
+                            cell.iPadScreenShotCollectionView.setData(screenshotUrls: ipadScreenshotUrls)
+                        } else {
+                            cell.dropButton.isHidden = true
+                        }
+                    }
                 }
                 
+                return cell
+            }
+        } else if path[indexPath.row] == CellName.Description.rawValue {
+            print(indexPath.row)
+            print(path[indexPath.row])
+            if let cell = self.dequeueReusableCell(withIdentifier: "DescriptionCell", for: indexPath) as? RealseNoteCell {
+                
+                cell.realseNoteCellDelegate = self
+                
+                cell.releaseNoteLabel.text = appInfo?.description
+                
+                if cell.releaseNoteLabel.actualNumberOfLines > 2 && !cell.moreButtonClick {
+                    cell.moreButton.isHidden = false
+                } else {
+                    cell.moreButton.isHidden = true
+                }
+                
+                return cell
+            }
+        } else if path[indexPath.row] == CellName.Developer.rawValue {
+            if let cell = self.dequeueReusableCell(withIdentifier: String(describing: DeveloperCell.self), for: indexPath) as? DeveloperCell {
+                 
+                cell.developerLabel.text = appInfo?.artistName
+                return cell
+            }
+        } else if path[indexPath.row] == CellName.Evaluate.rawValue {
+            if let cell = self.dequeueReusableCell(withIdentifier: String(describing: EvaluateCell.self), for: indexPath) as? EvaluateCell {
+                 
+//                cell.developerLabel.text = appInfo?.artistName
                 return cell
             }
         }
@@ -142,7 +187,11 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension DetailTableView: RealseNoteCellDelegate {
+extension DetailTableView: RealseNoteCellDelegate, ScreenShotCellDelegate {
+    func dropButtonClick() {
+        self.reloadData()
+    }
+    
     func moreButtonClick(_ sender: Any) {
         print("moreButtonClick")
         //let indexPath = IndexPath(item: 0, section: 1)

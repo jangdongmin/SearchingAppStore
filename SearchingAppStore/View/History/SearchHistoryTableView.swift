@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchHistoryTableViewDelegate {
+protocol SearchHistoryTableViewDelegate: class {
     func historySelect(title: String)
 }
 
@@ -16,7 +16,7 @@ class SearchHistoryTableView: UITableView {
     var initial: Bool = false
     var contents: [String] = []
     var searchText: String = ""
-    var historyTableViewDelegate: SearchHistoryTableViewDelegate?
+    weak var historyTableViewDelegate: SearchHistoryTableViewDelegate?
    
     override func awakeFromNib() {
         self.delegate = self

@@ -8,12 +8,12 @@
 
 import UIKit
  
-protocol RealseNoteCellDelegate {
+protocol RealseNoteCellDelegate: class {
     func moreButtonClick(_ sender: Any)
 }
 
 class RealseNoteCell: UITableViewCell {
-    var realseNoteCellDelegate: RealseNoteCellDelegate?
+    weak var realseNoteCellDelegate: RealseNoteCellDelegate?
     
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!

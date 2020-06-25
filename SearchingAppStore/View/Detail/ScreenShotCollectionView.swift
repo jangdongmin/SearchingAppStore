@@ -9,15 +9,15 @@
 import UIKit
 
 class ScreenShotCollectionView: UICollectionView {
-    var appInfo: AppInfo?
+    var screenshotUrls: [String]?
     
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
     }
     
-    func setData(appInfo: AppInfo) {
-        self.appInfo = appInfo
+    func setData(screenshotUrls: [String]) {
+        self.screenshotUrls = screenshotUrls
         self.reloadData()
     }
 }
@@ -25,13 +25,13 @@ class ScreenShotCollectionView: UICollectionView {
 
 extension ScreenShotCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return appInfo?.screenshotUrls?.count ?? 0
+        return screenshotUrls?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: ScreenShotCollectionViewCell.self), for: indexPath) as? ScreenShotCollectionViewCell {
             
-            if let screenshotUrls = appInfo?.screenshotUrls {
+            if let screenshotUrls = screenshotUrls {
                 if let imgUrl = URL(string: screenshotUrls[indexPath.row]) {
                     cell.screenShotImageVIew.loadImageTask(url: imgUrl, placeholder: nil)
                 }

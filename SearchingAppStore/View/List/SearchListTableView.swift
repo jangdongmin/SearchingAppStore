@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SearchListTableViewDelegate {
+protocol SearchListTableViewDelegate: class {
     func detailSelect(appInfo: AppInfo)
 //    func dataMoreLoad(page: Int)
 }
@@ -18,7 +18,7 @@ class SearchListTableView: UITableView {
     var contents: [AppInfo] = []
     //var isLoading = false
     
-    var searchListTableViewDelegate: SearchListTableViewDelegate?
+    weak var searchListTableViewDelegate: SearchListTableViewDelegate?
     
     override func awakeFromNib() {
         self.delegate = self

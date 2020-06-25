@@ -12,6 +12,7 @@ class DetailViewController: UIViewController {
     var appInfo: AppInfo?
     
     @IBOutlet weak var detailTableView: DetailTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
            
