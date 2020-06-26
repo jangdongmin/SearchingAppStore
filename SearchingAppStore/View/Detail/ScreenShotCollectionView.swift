@@ -14,6 +14,13 @@ class ScreenShotCollectionView: UICollectionView {
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
+        
+        setupUI()
+    }
+    
+    func setupUI() {
+        let nib = UINib(nibName: "ScreenShotCollectionViewCell", bundle: nil)
+        self.register(nib, forCellWithReuseIdentifier: "ScreenShotCollectionViewCell")
     }
     
     func setData(screenshotUrls: [String]) {

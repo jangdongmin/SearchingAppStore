@@ -50,6 +50,21 @@ class Util {
         return "\(resultStr)개의 평가"
     }
     
+    func decimalWon(value: Int) -> String? {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        let result = numberFormatter.string(from: NSNumber(value: value))
+        
+        return result
+    }
+    
+    func bytesToMega(value: Int?) -> String {
+        if let value = value {
+            return String(format: "%.1f",  Double(value / 1024 / 1024))
+        }
+        return ""
+    }
+    
     func dateConvert(component: DateComponents) -> String {
         if let year = component.year {
             if year != 0 {
@@ -101,6 +116,11 @@ class Util {
         //        dateFormatter.timeZone = TimeZone.current
         //        dateFormatter.locale = Locale.current
         return dateFormatter.date(from: date)
+    }
+    
+    func getOSInfo() -> String {
+        let os = ProcessInfo().operatingSystemVersion
+        return String(os.majorVersion) + "." + String(os.minorVersion) + "." + String(os.patchVersion)
     }
 }
  
