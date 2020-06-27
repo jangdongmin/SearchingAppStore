@@ -113,8 +113,6 @@ class SearchViewController: UIViewController {
     }
     
     func listShowing(index: Int) {
-        print("listShowing = ", index)
-
         if let tableView = self.histoyTableView {
             tableView.removeFromSuperview()
         }

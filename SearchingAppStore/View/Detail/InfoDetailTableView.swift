@@ -126,6 +126,18 @@ extension InfoDetailTableView: UITableViewDelegate, UITableViewDataSource {
                 infoDetailTableViewDelegate?.calculateHeight(index: indexPath.row)
                 isCheck[indexPath.row] = cell.frame.size.height
             }
+        } else if path[indexPath.row] == CellName.sellerUrl.rawValue {
+            if let sellerUrl = appInfo?.sellerUrl {
+                if let url = URL(string: sellerUrl) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
+        } else if path[indexPath.row] == CellName.privacy.rawValue {
+            if let sellerUrl = appInfo?.sellerUrl {
+                if let url = URL(string: sellerUrl) {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
         }
     }
     

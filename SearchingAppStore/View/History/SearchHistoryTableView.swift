@@ -67,7 +67,7 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
                 let historyText = contents[indexPath.row]
                 let attributedStr = NSMutableAttributedString(string: historyText)
                  
-                print("searchText = ", searchText, " historyText = ", historyText)
+                //print("searchText = ", searchText, " historyText = ", historyText)
                 print((historyText.lowercased() as NSString).range(of: searchText.lowercased()))
                 
                 attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText.lowercased() as NSString).range(of: searchText.lowercased()))

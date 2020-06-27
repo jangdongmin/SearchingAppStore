@@ -9,12 +9,13 @@
 import UIKit
  
 protocol MoreTextCellDelegate: class {
-    func releaseNoteMoreButtonClick(_ sender: Any)
+    func releaseNoteMoreButtonClick(index: Int?)
 }
 
 class MoreTextCell: UITableViewCell {
     weak var moreTextCellDelegate: MoreTextCellDelegate?
     
+    var index: Int?
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var versionLabel: UILabel!
     @IBOutlet weak var releaseNoteLabel: UILabel!
@@ -23,6 +24,6 @@ class MoreTextCell: UITableViewCell {
     @IBAction func moreButtonClick(_ sender: Any) {
         releaseNoteLabel.numberOfLines = 0
         moreButton.isHidden = true
-        moreTextCellDelegate?.releaseNoteMoreButtonClick(sender)
+        moreTextCellDelegate?.releaseNoteMoreButtonClick(index: index)
     }
 }

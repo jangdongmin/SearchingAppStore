@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ScreenShotCellDelegate: class {
-    func dropButtonClick()
+    func screenShotDropButtonClick(index: Int?)
 }
 
 class ScreenShotCell: UITableViewCell {
@@ -20,6 +20,11 @@ class ScreenShotCell: UITableViewCell {
     @IBOutlet weak var dropButton: UIButton!
     @IBOutlet weak var iPadScreenShotContentView: UIStackView!
     
+    @IBOutlet weak var iPhoneIconImageView: UIImageView!
+    @IBOutlet weak var iPhoneLabel: UILabel!
+    
+    var index: Int?
+    
     override func awakeFromNib() {
         screenShotCollectionView.decelerationRate = .fast
         iPadScreenShotCollectionView.decelerationRate = .fast
@@ -28,6 +33,6 @@ class ScreenShotCell: UITableViewCell {
     @IBAction func dropButtonClick(_ sender: Any) {
         iPadScreenShotContentView.isHidden = false
         dropButton.isHidden = true
-        screenShotCellDelegate?.dropButtonClick()
+        screenShotCellDelegate?.screenShotDropButtonClick(index: index)
     }
 }

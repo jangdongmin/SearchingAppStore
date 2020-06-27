@@ -186,6 +186,8 @@
                 <outlet property="dropButton" destination="bbM-Cf-r4L" id="MKm-kb-5Re"/>
                 <outlet property="iPadScreenShotCollectionView" destination="vXI-78-mWl" id="8Tg-nh-4oD"/>
                 <outlet property="iPadScreenShotContentView" destination="0c4-Cc-0e0" id="Zrk-D2-Qa0"/>
+                <outlet property="iPhoneIconImageView" destination="c2L-XH-xjK" id="abi-QT-O6z"/>
+                <outlet property="iPhoneLabel" destination="Ge3-U5-iDN" id="tOR-K0-WKH"/>
                 <outlet property="screenShotCollectionView" destination="Obk-aM-f9c" id="l4k-8J-Ikf"/>
             </connections>
             <point key="canvasLocation" x="139" y="130"/>

@@ -23,7 +23,9 @@ class DetailTableView: UITableView {
     
     var appInfo: AppInfo?
     var path = [Int:String]()
-    var isCheck = [Int:CGFloat]()
+    var convertHeight = [Int:CGFloat]()
+    var isCheck = [Int:Bool]()
+    
     override func awakeFromNib() {
         self.delegate = self
         self.dataSource = self
@@ -86,7 +88,7 @@ class DetailTableView: UITableView {
 
 extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if let height = isCheck[indexPath.row] {
+        if let height = convertHeight[indexPath.row] {
             return height
         }
         return UITableView.automaticDimension
@@ -149,13 +151,18 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
             if let cell = self.dequeueReusableCell(withIdentifier: String(describing: MoreTextCell.self), for: indexPath) as? MoreTextCell {
                 
                 cell.moreTextCellDelegate = self
-
+                
+                cell.index = indexPath.row
                 cell.timeLabel.text = ""
                 cell.versionLabel.text = ""
                 cell.releaseNoteLabel.text = appInfo?.releaseNotes
                 
                 if cell.releaseNoteLabel.actualNumberOfLines > 2 {
-                    cell.moreButton.isHidden = false
+                    if isCheck[indexPath.row] != nil {
+                        cell.moreButton.isHidden = true
+                    } else {
+                        cell.moreButton.isHidden = false
+                    }
                 } else {
                     cell.moreButton.isHidden = true
                 }
@@ -183,6 +190,11 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                     cell.screenShotCollectionView.setData(screenshotUrls: screenshotUrls)
                     if let ipadScreenshotUrls = appInfo?.ipadScreenshotUrls {
                         if ipadScreenshotUrls.count > 0 {
+                            cell.iPhoneLabel.text = "iPad용 앱 제공"
+                            cell.iPhoneIconImageView.image = UIImage(named: "iPadIcon")
+                            
+                            cell.index = indexPath.row
+                            
                             cell.screenShotCellDelegate = self
                             cell.iPadScreenShotCollectionView.setData(screenshotUrls: ipadScreenshotUrls)
                         } else {
@@ -198,9 +210,13 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                 
                 cell.moreTextCellDelegate = self
                 cell.releaseNoteLabel.text = appInfo?.description
-                
+                cell.index = indexPath.row
                 if cell.releaseNoteLabel.actualNumberOfLines > 2 {
-                    cell.moreButton.isHidden = false
+                    if isCheck[indexPath.row] != nil {
+                        cell.moreButton.isHidden = true
+                    } else {
+                        cell.moreButton.isHidden = false
+                    }
                 } else {
                     cell.moreButton.isHidden = true
                 }
@@ -234,7 +250,7 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
         } else if path[indexPath.row] == CellName.Review.rawValue {
             if let cell = self.dequeueReusableCell(withIdentifier: String(describing: ReviewCell.self), for: indexPath) as? ReviewCell {
                 if appInfo != nil {
-                    let reviews = [Review(userName: "장동민", starRate: 4.0, time: "2020", content: "안녕하세요. 장동민입니다.\n처음 뵙겠습니다. \n카카오뱅크 꼭 가고 싶습니다.", title: "합격하고 싶습니다."),
+                    let reviews = [Review(userName: "장동민", starRate: 4.0, time: "2020", content: "안녕하세요. 장동민입니다.\n처음 뵙겠습니다. \n잘 부탁드립니다.", title: "Hello"),
                                    Review(userName: "장동민", starRate: 4.0, time: "2020", content: "안녕하세요. 장동민입니다. API에 리뷰 데이터가 없어 테스트 데이터를 넣었습니다.", title: "졸리다...."),
                                    Review(userName: "아아", starRate: 4.0, time: "2020", content: "테스트 데이터입니다.", title: "흐암.")]
                      
@@ -260,23 +276,37 @@ extension DetailTableView: MoreTextCellDelegate, ScreenShotCellDelegate, InfoCel
     func cellHeight(value: CGFloat) {
         for i in 0..<path.count {
             if path[i] == CellName.Info.rawValue {
-                isCheck[i] = value
+                isCheck[i] = true
+                convertHeight[i] = value
             }
         }
-        
+
         self.beginUpdates()
         self.endUpdates()
     }
     
-    func dropButtonClick() {
-        self.beginUpdates()
-        self.endUpdates()
+    func screenShotDropButtonClick(index: Int?) {
+        if let index = index {
+            if let cell = self.cellForRow(at: IndexPath(row: index, section: 0)) as? ScreenShotCell {
+                cell.iPhoneLabel.text = "iPhone"
+                cell.iPhoneIconImageView.image = UIImage(named: "iPhoneIcon")
+            }
+
+            UIView.performWithoutAnimation {
+                self.beginUpdates()
+                self.endUpdates()
+            }
+        }
     }
     
-    func releaseNoteMoreButtonClick(_ sender: Any) {
-        if path[1] == CellName.ReleaseNote.rawValue {
-            self.beginUpdates()
-            self.endUpdates()
+    func releaseNoteMoreButtonClick(index: Int?) {
+        if let index = index {
+            isCheck[index] = true
+
+            UIView.performWithoutAnimation {
+                self.beginUpdates()
+                self.endUpdates()
+            }
         }
     }
 }

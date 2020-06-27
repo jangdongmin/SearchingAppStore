@@ -27,7 +27,7 @@ class SearchViewModel {
         
         var sortArr = [String]()
         for historyText in historyArr {
-            print((historyText.lowercased() as NSString).range(of: text.lowercased()), " historyText = ", historyText)
+//            print((historyText.lowercased() as NSString).range(of: text.lowercased()), " historyText = ", historyText)
             if (historyText.lowercased() as NSString).range(of: text.lowercased()).lowerBound == 0 {
                 sortArr.append(historyText)
             }
