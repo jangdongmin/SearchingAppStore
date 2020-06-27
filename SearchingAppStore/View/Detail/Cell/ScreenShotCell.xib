@@ -79,13 +79,13 @@
                                 </constraints>
                             </view>
                             <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0c4-Cc-0e0">
-                                <rect key="frame" x="0.0" y="436" width="384" height="427"/>
+                                <rect key="frame" x="0.0" y="436" width="384" height="436"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="vXI-78-mWl" customClass="ScreenShotCollectionView" customModule="SearchingAppStore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="384" height="391"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="384" height="400"/>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="391" id="Ihg-tr-JWy"/>
+                                            <constraint firstAttribute="height" constant="400" id="Ihg-tr-JWy"/>
                                         </constraints>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="gD3-Qt-t44" customClass="SnappingLayout" customModule="SearchingAppStore" customModuleProvider="target">
                                             <size key="itemSize" width="128" height="128"/>
@@ -96,7 +96,7 @@
                                         <cells/>
                                     </collectionView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eO2-1A-DRo">
-                                        <rect key="frame" x="0.0" y="401" width="384" height="26"/>
+                                        <rect key="frame" x="0.0" y="410" width="384" height="26"/>
                                         <subviews>
                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="iPadIcon" translatesAutoresizingMaskIntoConstraints="NO" id="oQU-LK-Ddh">
                                                 <rect key="frame" x="0.0" y="5" width="14" height="16"/>

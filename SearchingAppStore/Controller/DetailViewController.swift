@@ -76,7 +76,12 @@ extension DetailViewController: DetailTableViewDelegate {
                 navigationItem.titleView?.isHidden = false
                 
                 self.navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
-                self.navigationController?.navigationBar.standardAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+                if self.traitCollection.userInterfaceStyle == .dark {
+                    self.navigationController?.navigationBar.standardAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialDark)
+                } else {
+                    self.navigationController?.navigationBar.standardAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+                }
+                
             }
         } else {
             if self.navigationController != nil {

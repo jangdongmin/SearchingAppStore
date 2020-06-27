@@ -166,5 +166,24 @@ class Util {
         return newImage
     }
     
+//    func imageRatio(width: CGFloat, limit: CGFloat, horizon: Bool) -> (CGFloat, CGFloat) {
+//        let widthStandard: CGFloat = (limit - 10)
+//        let height: CGFloat = widthStandard / 0.75
+//        return (widthStandard, height)
+//    }
 }
  
+
+//else {
+//    let widthStandard: CGFloat = 220
+//    var result: CGFloat = 0
+//    if width > widthStandard {
+//        let height: CGFloat = widthStandard / 0.56
+//        return (widthStandard, height)
+//    } else {
+//        result = width / widthStandard
+//        let widthResult = CGFloat(result * UIScreen.main.bounds.width)
+//        let height: CGFloat = width / 0.56
+//        return (widthResult, height)
+//    }
+//}

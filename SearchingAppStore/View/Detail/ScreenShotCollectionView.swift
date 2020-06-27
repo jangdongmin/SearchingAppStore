@@ -51,7 +51,33 @@ extension ScreenShotCollectionView: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        //다운받는 이미지 사이즈
+        
+        if let screenshotUrls = screenshotUrls {
+            if screenshotUrls.count > 0 {
+                let arr = screenshotUrls[0].split(separator: "/")
+                let fileNameArr = arr[arr.count - 1].split(separator: "x")
+                if fileNameArr.count == 2 {
+                    guard let width = Int(fileNameArr[0]) else {
+                        return CGSize(width: 220, height: 391)
+                    }
+                     
+                    let heightArr = fileNameArr[1].filter("01234567890.".contains)
+                    let heightStrArr = heightArr.split(separator: ".")
+                    guard let height = Int(heightStrArr[0]) else {
+                        return CGSize(width: 220, height: 391)
+                    }
+                    
+                    if width > height {
+                        let width: CGFloat = self.frame.size.width
+                        let height: CGFloat = width / 0.75
+                        return CGSize(width: width, height: height)
+                    } else {
+                        return CGSize(width: 220, height: 391)
+                    }
+                }
+            }
+        }
+         
         return CGSize(width: 220, height: 391)
     }
 }

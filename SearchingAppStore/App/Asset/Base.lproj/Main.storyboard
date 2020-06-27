@@ -206,7 +206,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="4Ss-qT-dqA"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="업데이트" image="square.and.arrow.down" catalog="system" id="gdV-OY-sZ6"/>
+                    <tabBarItem key="tabBarItem" title="업데이트" image="square.and.arrow.down" catalog="system" badgeValue="10" id="gdV-OY-sZ6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="g8U-N8-OLU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
