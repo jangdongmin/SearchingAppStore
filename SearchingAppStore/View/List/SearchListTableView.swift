@@ -68,8 +68,8 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.userRatingCountLabel.text = "\(Util.sharedInstance.numberCutting(userRatingCount, small: true))"
             }
              
-            if let artworkUrl60 = appInfo.artworkUrl60 {
-                if let imgUrl = URL(string: artworkUrl60) {
+            if let artworkUrl100 = appInfo.artworkUrl100 {
+                if let imgUrl = URL(string: artworkUrl100) {
                     cell.appIconImageView.loadImageTask(url: imgUrl, placeholder: nil)
                 }
             }
@@ -93,10 +93,7 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
                     }
                 }
             }
-            
-            if let bundleId = appInfo.bundleId {
-                //cell.appNameLabel.text = trackName
-            }
+             
             return cell
         }
         return UITableViewCell()

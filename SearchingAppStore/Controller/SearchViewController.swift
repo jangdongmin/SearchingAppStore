@@ -168,7 +168,8 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
         self.searchController.searchBar.text = title
         self.searchController.searchBar.resignFirstResponder()
         self.searchController.isActive = true
-//        self.searchController.dismiss(animated: true, completion: nil)
+
+        //        self.searchController.dismiss(animated: true, completion: nil)
         searchListTableView?.setContentOffset(.zero, animated: false)
         
         dataLoadingVisible(isLoading: true)

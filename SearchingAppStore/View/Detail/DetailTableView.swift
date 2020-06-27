@@ -123,8 +123,8 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                     cell.userRatingCountLabel.text = "\(Util.sharedInstance.numberCutting(userRatingCount, small: false))"
                 }
                 
-                if let artworkUrl100 = appInfo?.artworkUrl100 {
-                    if let imgUrl = URL(string: artworkUrl100) {
+                if let artworkUrl512 = appInfo?.artworkUrl512 {
+                    if let imgUrl = URL(string: artworkUrl512) {
                         cell.appIconImageView.loadImageTask(url: imgUrl, placeholder: nil)
                     }
                 }

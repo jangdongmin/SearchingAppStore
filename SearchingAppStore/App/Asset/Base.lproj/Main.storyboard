@@ -37,7 +37,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t50-n1-sWa">
-                                <rect key="frame" x="20" y="0.0" width="374" height="896"/>
+                                <rect key="frame" x="20" y="20" width="374" height="876"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                             </view>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="582-t2-muV">
@@ -76,14 +76,15 @@
                     </tabBar>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="selectedIndex">
-                            <integer key="value" value="3"/>
+                            <integer key="value" value="4"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                     <connections>
-                        <segue destination="VEQ-TZ-hRD" kind="relationship" relationship="viewControllers" id="frW-Ll-nsw"/>
-                        <segue destination="436-rT-0ov" kind="relationship" relationship="viewControllers" id="BKE-2Z-Zab"/>
-                        <segue destination="d5f-aT-9mn" kind="relationship" relationship="viewControllers" id="80k-hw-DyW"/>
-                        <segue destination="W0i-F4-94L" kind="relationship" relationship="viewControllers" id="1Xf-od-qhR"/>
+                        <segue destination="VEQ-TZ-hRD" kind="relationship" relationship="viewControllers" id="dQf-jQ-ALx"/>
+                        <segue destination="436-rT-0ov" kind="relationship" relationship="viewControllers" id="rQz-Ow-v2J"/>
+                        <segue destination="uMu-cr-1gy" kind="relationship" relationship="viewControllers" id="YFj-n7-If8"/>
+                        <segue destination="d5f-aT-9mn" kind="relationship" relationship="viewControllers" id="KL2-j1-P3t"/>
+                        <segue destination="W0i-F4-94L" kind="relationship" relationship="viewControllers" id="9BE-6D-A1u"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wvA-Z2-tTL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -157,11 +158,27 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="QCq-ff-QKL"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="투데이" image="doc.plaintext" catalog="system" id="pOJ-dd-pWt"/>
+                    <tabBarItem key="tabBarItem" title="투데이" image="doc.richtext" catalog="system" id="pOJ-dd-pWt"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1w-2l-2sb" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-3400" y="1855"/>
+        </scene>
+        <!--앱-->
+        <scene sceneID="zP0-BE-v1M">
+            <objects>
+                <viewController id="uMu-cr-1gy" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="niq-oy-hQ7">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <viewLayoutGuide key="safeArea" id="1DN-zs-kDz"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="앱" image="square.stack.3d.up" catalog="system" id="xEG-de-9Nz"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0IZ-a4-Q3T" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-4122" y="1855"/>
         </scene>
         <!--게임-->
         <scene sceneID="LtB-2b-uVC">
@@ -197,9 +214,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="doc.plaintext" catalog="system" width="115" height="128"/>
+        <image name="doc.richtext" catalog="system" width="115" height="128"/>
         <image name="gamecontroller" catalog="system" width="128" height="82"/>
         <image name="magnifyingglass" catalog="system" width="128" height="115"/>
         <image name="square.and.arrow.down" catalog="system" width="121" height="128"/>
+        <image name="square.stack.3d.up" catalog="system" width="128" height="124"/>
     </resources>
 </document>

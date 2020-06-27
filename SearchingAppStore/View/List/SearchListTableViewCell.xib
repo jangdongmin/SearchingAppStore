@@ -16,7 +16,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="DeV-7A-sz6">
-                        <rect key="frame" x="0.0" y="10" width="414" height="62"/>
+                        <rect key="frame" x="0.0" y="15" width="414" height="62"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tdn-7i-HhD" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="62" height="62"/>
@@ -31,7 +31,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                        <color key="value" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -54,10 +54,10 @@
                                         <rect key="frame" x="0.0" y="41.5" width="263" height="20.5"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cwK-P9-4w7" customClass="HorizontalView" customModule="SearchingAppStore" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="2.5" width="15" height="15"/>
+                                                <rect key="frame" x="0.0" y="3" width="14" height="14"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="Dlk-XC-bam">
-                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
@@ -68,15 +68,15 @@
                                                     <constraint firstItem="Dlk-XC-bam" firstAttribute="width" secondItem="cwK-P9-4w7" secondAttribute="width" id="GMg-6E-vUb"/>
                                                     <constraint firstItem="Dlk-XC-bam" firstAttribute="centerX" secondItem="cwK-P9-4w7" secondAttribute="centerX" id="Ux0-9l-zLT"/>
                                                     <constraint firstItem="Dlk-XC-bam" firstAttribute="centerY" secondItem="cwK-P9-4w7" secondAttribute="centerY" id="bgW-sa-jO0"/>
-                                                    <constraint firstAttribute="width" constant="15" id="eoE-iK-zQX"/>
-                                                    <constraint firstAttribute="height" constant="15" id="tBM-jL-n9A"/>
+                                                    <constraint firstAttribute="width" constant="14" id="eoE-iK-zQX"/>
+                                                    <constraint firstAttribute="height" constant="14" id="tBM-jL-n9A"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d5H-cn-8Gu" customClass="HorizontalView" customModule="SearchingAppStore" customModuleProvider="target">
-                                                <rect key="frame" x="18" y="2.5" width="15" height="15"/>
+                                                <rect key="frame" x="17" y="3" width="14" height="14"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="Gtb-eM-AQQ">
-                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
@@ -90,10 +90,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jbp-QQ-wPd" customClass="HorizontalView" customModule="SearchingAppStore" customModuleProvider="target">
-                                                <rect key="frame" x="36" y="2.5" width="15" height="15"/>
+                                                <rect key="frame" x="34" y="3" width="14" height="14"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="Un5-1b-NL6">
-                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
@@ -107,10 +107,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GMB-Ny-a9d" customClass="HorizontalView" customModule="SearchingAppStore" customModuleProvider="target">
-                                                <rect key="frame" x="54" y="2.5" width="15" height="15"/>
+                                                <rect key="frame" x="51" y="3" width="14" height="14"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="KmR-3g-q48">
-                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
@@ -124,10 +124,10 @@
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OyB-cd-Six" customClass="HorizontalView" customModule="SearchingAppStore" customModuleProvider="target">
-                                                <rect key="frame" x="72" y="2.5" width="15" height="15"/>
+                                                <rect key="frame" x="68" y="3" width="14" height="14"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star_black" translatesAutoresizingMaskIntoConstraints="NO" id="un3-YL-D2r">
-                                                        <rect key="frame" x="0.0" y="0.0" width="15" height="15"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
                                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </imageView>
@@ -141,8 +141,8 @@
                                                 </constraints>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vx4-xA-ozB">
-                                                <rect key="frame" x="90" y="4" width="173" height="12"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                <rect key="frame" x="85" y="3" width="178" height="14.5"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                 <color key="textColor" systemColor="systemGray4Color" red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -193,8 +193,9 @@
                                 <rect key="frame" x="345" y="0.0" width="69" height="62"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TSl-cj-uM1" customClass="CustomButton" customModule="SearchingAppStore" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="16" width="69" height="30"/>
-                                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <rect key="frame" x="0.0" y="16.5" width="69" height="29"/>
+                                        <color key="backgroundColor" red="0.94117647058823528" green="0.94509803921568625" blue="0.96470588235294119" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <state key="normal" title="열기"/>
                                         <userDefinedRuntimeAttributes>
                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
@@ -217,7 +218,7 @@
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7cK-ms-mkc">
-                        <rect key="frame" x="0.0" y="87" width="414" height="240"/>
+                        <rect key="frame" x="0.0" y="92" width="414" height="240"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WWx-Q2-3wT" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="131.5" height="240"/>
@@ -229,7 +230,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                        <color key="value" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -243,7 +244,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                        <color key="value" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -257,7 +258,7 @@
                                         <real key="value" value="1"/>
                                     </userDefinedRuntimeAttribute>
                                     <userDefinedRuntimeAttribute type="color" keyPath="borderColorV">
-                                        <color key="value" systemColor="systemGray6Color" red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="value" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
@@ -268,8 +269,8 @@
                     </stackView>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="DeV-7A-sz6" firstAttribute="top" secondItem="L8a-Xp-rfj" secondAttribute="top" constant="10" id="HJy-Ha-mTR"/>
-                    <constraint firstAttribute="bottom" secondItem="7cK-ms-mkc" secondAttribute="bottom" constant="10" id="PfF-9X-GiC"/>
+                    <constraint firstItem="DeV-7A-sz6" firstAttribute="top" secondItem="L8a-Xp-rfj" secondAttribute="top" constant="15" id="HJy-Ha-mTR"/>
+                    <constraint firstAttribute="bottom" secondItem="7cK-ms-mkc" secondAttribute="bottom" constant="20" id="PfF-9X-GiC"/>
                     <constraint firstAttribute="trailing" secondItem="DeV-7A-sz6" secondAttribute="trailing" id="YsU-Yi-dho"/>
                     <constraint firstItem="7cK-ms-mkc" firstAttribute="top" secondItem="DeV-7A-sz6" secondAttribute="bottom" constant="15" id="izk-Eu-njt"/>
                     <constraint firstItem="DeV-7A-sz6" firstAttribute="leading" secondItem="L8a-Xp-rfj" secondAttribute="leading" id="jvb-zJ-iy7"/>
