@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol DetailTableViewDelegate {
+    func scroll(_ scrollView: UIScrollView)
+}
+
 class DetailTableView: UITableView {
    
     enum CellName: String {
@@ -25,6 +29,7 @@ class DetailTableView: UITableView {
     var path = [Int:String]()
     var convertHeight = [Int:CGFloat]()
     var isCheck = [Int:Bool]()
+    var detailTableViewDelegate: DetailTableViewDelegate?
     
     override func awakeFromNib() {
         self.delegate = self
@@ -321,3 +326,8 @@ extension Double {
     }
 }
 
+extension DetailTableView: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        detailTableViewDelegate?.scroll(scrollView)
+    }
+}

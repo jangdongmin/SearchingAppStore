@@ -20,11 +20,15 @@ class SearchViewController: UIViewController {
     }
      
     @IBOutlet weak var contentView: UIView!
+    @IBOutlet var indicator: UIActivityIndicatorView!
+    
     var searchListTableView: SearchListTableView?
     var histoyTableView: SearchHistoryTableView?
-
-    @IBOutlet var indicator: UIActivityIndicatorView!
-     
+ 
+    var standardAppearanceShadowColor: UIColor?
+    var standardAppearanceBackgroundColor: UIColor?
+    var standardAppearanceBlurEffect: UIBlurEffect?
+    
     private let searchController: UISearchController = {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = "App Store"
@@ -41,13 +45,13 @@ class SearchViewController: UIViewController {
     func setupBind() {
         //최근 검색어 - 전체
         viewModel.allHistorySubject.asObservable().subscribe {
-            print("allHistorySubject = ", $0)
+//            print("allHistorySubject = ", $0)
             self.histoyTableView?.setData(strArr: $0.element ?? [], initial: false)
         }.disposed(by: disposeBag)
         
         //search bar에서 검색했을때
         viewModel.sortHistorySubject.asObservable().subscribe {
-            print("sortHistorySubject = ", $0)
+//            print("sortHistorySubject = ", $0)
             self.histoyTableView?.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
@@ -69,11 +73,12 @@ class SearchViewController: UIViewController {
                 
                 self.listShowing(index: 100)
                 self.dataLoadingVisible(isLoading: true)
+                
                 self.viewModel.searchUrl(text: text, page: 0, inheritance: false)
             }
 //            self.searchController.isActive = false
         }).disposed(by: disposeBag)
-        
+            
         searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
             self.listShowing(index: ViewingList.History.rawValue)
             if let histoyTableView = self.histoyTableView {
@@ -83,8 +88,7 @@ class SearchViewController: UIViewController {
         }).disposed(by: disposeBag)
          
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
-            print("searchBar.rx.text: \($0)")
-            
+//            print("searchBar.rx.text: \($0)")
             self.listShowing(index: ViewingList.History.rawValue)
             
             if $0 == "" {
@@ -110,6 +114,16 @@ class SearchViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
         
         navigationController?.navigationBar.prefersLargeTitles = true
+        
+        standardAppearanceShadowColor = self.navigationController?.navigationBar.standardAppearance.shadowColor
+        standardAppearanceBackgroundColor = self.navigationController?.navigationBar.standardAppearance.backgroundColor
+        standardAppearanceBlurEffect = self.navigationController?.navigationBar.standardAppearance.backgroundEffect
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.navigationBar.standardAppearance.shadowColor = standardAppearanceShadowColor
+        self.navigationController?.navigationBar.standardAppearance.backgroundColor = standardAppearanceBackgroundColor
+        self.navigationController?.navigationBar.standardAppearance.backgroundEffect = standardAppearanceBlurEffect
     }
     
     func listShowing(index: Int) {
@@ -155,8 +169,7 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableViewDelegate {
     func detailSelect(appInfo: AppInfo) {
-        print("detailSelect = ", appInfo)
-        
+        //print("detailSelect = ", appInfo)
         if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: String(describing: DetailViewController.self)) as? DetailViewController {
             vc.appInfo = appInfo
             self.navigationController?.pushViewController(vc, animated: true)
@@ -164,12 +177,11 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
     }
     
     func historySelect(title: String) {
-        print("historySelect = ", title)
+        //print("historySelect = ", title)
         self.searchController.searchBar.text = title
         self.searchController.searchBar.resignFirstResponder()
         self.searchController.isActive = true
 
-        //        self.searchController.dismiss(animated: true, completion: nil)
         searchListTableView?.setContentOffset(.zero, animated: false)
         
         dataLoadingVisible(isLoading: true)
@@ -182,6 +194,5 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
 //            viewModel.searchUrl(text: searchText, page: page, inheritance: true)
 //        }
 //    }
-        
 }
  

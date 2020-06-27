@@ -12,47 +12,87 @@ class DetailViewController: UIViewController {
     var appInfo: AppInfo?
     
     @IBOutlet weak var detailTableView: DetailTableView!
-    
+//    var rightBarButtonItem: UIBarButtonItem?
     override func viewDidLoad() {
         super.viewDidLoad()
             
-//        if let artworkUrl60 = appInfo?.artworkUrl60 {
-//            if let imgUrl = URL(string: artworkUrl60) {
-//                Util.sharedInstance.imageLoad(url: imgUrl, placeholder: nil) { result in
-//                    self.navigationController?.addLogoImage(image: result)
-//                }
-//             }
-//        }
-
-        setNavigationBar()
+        setupNavigationBar()
         setupUI()
-        setupBind()
     }
     
-    func setNavigationBar() {
+    func setupNavigationBar() {
         let appearance = UINavigationBarAppearance()
-        appearance.configureWithOpaqueBackground()
-        appearance.shadowImage = nil
         appearance.shadowColor = nil
-        appearance.backgroundColor = .gray
-        appearance.backgroundEffect = UIBlurEffect(style: .light)
-        
-//        UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).standardAppearance = appearance
-//        UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).scrollEdgeAppearance = appearance
-//        UINavigationBar.appearance(whenContainedInInstancesOf: [UINavigationController.self]).compactAppearance = appearance
-         
+        appearance.shadowImage = nil
+        appearance.backgroundColor = UIColor(named: "whiteNBlack")
         self.navigationController?.navigationBar.standardAppearance = appearance
-//        self.navigationController?.navigationBar.shadowImage = UIImage()
-     }
+         
+        if let artworkUrl60 = appInfo?.artworkUrl60 {
+            if let imgUrl = URL(string: artworkUrl60) {
+                Util.sharedInstance.imageLoad(url: imgUrl, placeholder: nil) { result in
+                    DispatchQueue.main.async {
+                        self.addNavBarImage(image: result)
+                    }
+                }
+             }
+        }
+    }
+    
+    func addNavBarImage(image: UIImage) {
+        if navigationController != nil {
+//            rightBarButtonItem = UIBarButtonItem.init(image: UIImage(systemName: "plus.app"), style: .done, target: self, action: nil)
+//            self.navigationItem.rightBarButtonItem = rightBarButtonItem
+            
+            let iconSize = 30
+            let imageView = UIImageView(image: Util.sharedInstance.resizeImage(image: image, targetSize: CGSize(width: iconSize, height: iconSize)))
+            imageView.frame = CGRect(x: 0, y: 0, width: iconSize, height: iconSize)
+
+            imageView.layer.borderColor = UIColor.systemGray5.cgColor
+            imageView.layer.borderWidth = 1
+            imageView.layer.cornerRadius = 5
+            imageView.layer.masksToBounds = true
+
+            navigationItem.titleView = imageView
+            navigationItem.titleView?.isHidden = true
+        }
+    }
  
     func setupUI() {
         if let info = appInfo {
             detailTableView.setData(appInfo: info)
         }
-    }
-    
-    func setupBind() {
         
+        detailTableView.detailTableViewDelegate = self
     }
-    
 }
+
+extension DetailViewController: DetailTableViewDelegate {
+    func scroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > 0 {
+            if self.navigationController != nil {
+//                if let rightBarButtonItem = rightBarButtonItem {
+//                    rightBarButtonItem.isEnabled = true
+//                }
+                navigationItem.titleView?.isHidden = false
+                
+                self.navigationController?.navigationBar.standardAppearance.configureWithTransparentBackground()
+                self.navigationController?.navigationBar.standardAppearance.backgroundEffect = UIBlurEffect(style: .systemChromeMaterialLight)
+            }
+        } else {
+            if self.navigationController != nil {
+//                if let rightBarButtonItem = rightBarButtonItem {
+//                    rightBarButtonItem.isEnabled = false
+//                }
+                
+                navigationItem.titleView?.isHidden = true
+                
+                self.navigationController?.navigationBar.standardAppearance.shadowColor = nil
+                self.navigationController?.navigationBar.standardAppearance.shadowImage = nil
+                self.navigationController?.navigationBar.standardAppearance.backgroundColor = UIColor(named: "whiteNBlack")
+                self.navigationController?.navigationBar.standardAppearance.backgroundEffect = nil
+            }
+        }
+    }
+}
+
+

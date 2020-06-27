@@ -194,7 +194,7 @@ extension InfoDetailTableView: UITableViewDelegate, UITableViewDataSource {
                         return (item.lowercased().range(of: "watch".lowercased())) != nil ? true : false
                     })
                     
-                    print("modelName = ",modelName, " userDeviceMatch = ", userDeviceMatch)
+                    //print("modelName = ",modelName, " userDeviceMatch = ", userDeviceMatch)
                     
                     let systemVersion = UIDevice.current.systemVersion
 
@@ -328,3 +328,4 @@ extension InfoDetailTableView: UITableViewDelegate, UITableViewDataSource {
         return String(bytes: Data(bytes: &sysinfo.machine, count: Int(_SYS_NAMELEN)), encoding: .ascii)!.trimmingCharacters(in: .controlCharacters)
     }
 }
+

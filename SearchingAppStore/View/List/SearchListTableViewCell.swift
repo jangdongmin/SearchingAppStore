@@ -49,5 +49,4 @@ class SearchListTableViewCell: UITableViewCell {
         self.main_2_ImageView.loadStop()
         self.main_3_ImageView.loadStop()
     }
-     
 }
