@@ -79,7 +79,14 @@ extension SearchHistoryTableView: UITableViewDelegate, UITableViewDataSource {
                     //print("searchText = ", searchText, " historyText = ", historyText)
                     print((historyText.lowercased() as NSString).range(of: searchText.lowercased()))
                     
-                    attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText.lowercased() as NSString).range(of: searchText.lowercased()))
+                    if self.traitCollection.userInterfaceStyle == .dark {
+                        cell.titleLabel.textColor = .gray
+                        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.white, range: (historyText.lowercased() as NSString).range(of: searchText.lowercased()))
+                    } else {
+                        cell.titleLabel.textColor = .lightGray
+                        attributedStr.addAttribute(NSAttributedString.Key.foregroundColor, value: UIColor.black, range: (historyText.lowercased() as NSString).range(of: searchText.lowercased()))
+                    }
+                    
                     cell.titleLabel.attributedText = attributedStr
                     
                     cell.bottomLineImageView.isHidden = false
