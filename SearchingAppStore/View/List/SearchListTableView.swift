@@ -45,7 +45,6 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableView.automaticDimension
-//        return 350
     }
  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,9 +62,6 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
             
             if let genres = appInfo.genres {
                 cell.appDescLabel.text = genres[0]
-//                if appInfo.subTitle != "" {
-//                    cell.appDescLabel.text = appInfo.subTitle
-//                }
             }
             
             if let userRatingCount = appInfo.userRatingCount {
@@ -79,20 +75,28 @@ extension SearchListTableView: UITableViewDelegate, UITableViewDataSource {
             }
              
             if let screenshotUrls = appInfo.screenshotUrls {
-                if let imgUrl = URL(string: screenshotUrls[0]) {
-                    cell.main_1_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                if screenshotUrls.count > 0 {
+                    if let imgUrl = URL(string: screenshotUrls[0]) {
+                        cell.main_1_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                    }
                 }
                 
-                if let imgUrl = URL(string: screenshotUrls[1]) {
-                    cell.main_2_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
-                    //print("cell.main_2_ImageView = ", cell.main_2_ImageView.frame.size.height)
+                if screenshotUrls.count > 1 {
+                    if let imgUrl = URL(string: screenshotUrls[1]) {
+                        cell.main_2_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                    }
                 }
                 
-                if let imgUrl = URL(string: screenshotUrls[2]) {
-                    cell.main_3_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                if screenshotUrls.count > 2 {
+                    if let imgUrl = URL(string: screenshotUrls[2]) {
+                        cell.main_3_ImageView.loadImageTask(url: imgUrl, placeholder: nil)
+                    }
                 }
             }
             
+            if let bundleId = appInfo.bundleId {
+                //cell.appNameLabel.text = trackName
+            }
             return cell
         }
         return UITableViewCell()

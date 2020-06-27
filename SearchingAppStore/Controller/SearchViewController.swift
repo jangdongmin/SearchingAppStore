@@ -52,7 +52,7 @@ class SearchViewController: UIViewController {
         }.disposed(by: disposeBag)
         
         //검색결과는 이쪽으로 온다.
-        viewModel.requestResult.observeOn(MainScheduler.instance).subscribe {
+        viewModel.requestResult.observeOn(MainScheduler.asyncInstance).subscribe {
             if let error = $0.error {
                 print("requestResult = ", error)
             } else {
@@ -62,16 +62,24 @@ class SearchViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
          
-        searchController.searchBar.rx.searchButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+        searchController.searchBar.rx.searchButtonClicked.observeOn(MainScheduler.asyncInstance).asDriver(onErrorJustReturn: ()).drive(onNext: {
             if let text = self.searchController.searchBar.text {
                 self.viewModel.saveData(text: text)
                 self.viewModel.loadData()
                 
+                self.listShowing(index: 100)
                 self.dataLoadingVisible(isLoading: true)
                 self.viewModel.searchUrl(text: text, page: 0, inheritance: false)
             }
-            
-            self.searchController.isActive = false
+//            self.searchController.isActive = false
+        }).disposed(by: disposeBag)
+        
+        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+            self.listShowing(index: ViewingList.History.rawValue)
+            if let histoyTableView = self.histoyTableView {
+                histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
+            }
+            self.dataLoadingVisible(isLoading: false)
         }).disposed(by: disposeBag)
          
         searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
@@ -95,7 +103,7 @@ class SearchViewController: UIViewController {
         listShowing(index: ViewingList.History.rawValue)
         
         searchController.searchBar.setValue("취소", forKey:"cancelButtonText")
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.obscuresBackgroundDuringPresentation = false
         
         navigationItem.searchController = searchController
         navigationItem.title = "검색"
@@ -121,7 +129,7 @@ class SearchViewController: UIViewController {
                 tableView.historyTableViewDelegate = self
                 contentView.addSubview(tableView)
             }
-        } else {
+        } else if index == ViewingList.AppList.rawValue {
             if let tableView = loadXib(type: SearchListTableView.self) as? SearchListTableView {
                 searchListTableView = tableView
                 tableView.searchListTableViewDelegate = self
@@ -159,10 +167,12 @@ extension SearchViewController: SearchHistoryTableViewDelegate, SearchListTableV
     
     func historySelect(title: String) {
         print("historySelect = ", title)
-        self.searchController.resignFirstResponder()
+        self.searchController.searchBar.text = title
+        self.searchController.searchBar.resignFirstResponder()
+        self.searchController.isActive = true
+//        self.searchController.dismiss(animated: true, completion: nil)
         searchListTableView?.setContentOffset(.zero, animated: false)
         
-        self.searchController.searchBar.text = title
         dataLoadingVisible(isLoading: true)
         viewModel.searchUrl(text: title, page: 0, inheritance: false)
     }

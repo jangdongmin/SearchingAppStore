@@ -85,7 +85,7 @@ class InfoDetailTableView: UITableView {
             index += 1
         }
 
-        if (appInfo?.sellerName) != nil {
+        if (appInfo?.artistName) != nil {
             path[index] = CellName.literaryProperty.rawValue
             index += 1
         }
@@ -272,8 +272,8 @@ extension InfoDetailTableView: UITableViewDelegate, UITableViewDataSource {
                 cell.stateImageView.isHidden = true
                 cell.detailLabel.isHidden = true
                 
-                if let sellerName = appInfo?.sellerName {
-                    cell.contentLabel.text = "ⓒ \(sellerName)"
+                if let artistName = appInfo?.artistName {
+                    cell.contentLabel.text = "ⓒ \(artistName)"
                 }
             } else if path[indexPath.row] == CellName.sellerUrl.rawValue {
                 cell.titleLabel.text = "개발자 웹 사이트"

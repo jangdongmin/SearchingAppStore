@@ -139,8 +139,8 @@ extension DetailTableView: UITableViewDelegate, UITableViewDataSource {
                     cell.ageLabel.text = trackContentRating
                 }
                 
-                if let sellerName = appInfo?.sellerName {
-                    cell.appDescLabel.text = sellerName
+                if let artistName = appInfo?.artistName {
+                    cell.appDescLabel.text = artistName
                 }
                 
                 return cell
