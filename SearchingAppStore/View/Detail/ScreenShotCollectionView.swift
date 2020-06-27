@@ -51,8 +51,8 @@ extension ScreenShotCollectionView: UICollectionViewDelegate, UICollectionViewDa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        return CGSize(width: UIScreen.main.bounds.size.width / 2 + UIScreen.main.bounds.size.width / 6, height: self.frame.size.height)
+        //다운받는 이미지 사이즈
+        return CGSize(width: 220, height: 391)
     }
 }
 

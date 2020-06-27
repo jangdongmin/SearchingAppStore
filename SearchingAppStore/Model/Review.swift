@@ -8,6 +8,7 @@
 
 import UIKit
 
+//테스트용 입니다.
 struct Review: Codable {
     let userName: String?
     let starRate: Double?

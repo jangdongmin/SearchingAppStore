@@ -218,10 +218,10 @@
                         </constraints>
                     </stackView>
                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="7cK-ms-mkc">
-                        <rect key="frame" x="0.0" y="92" width="414" height="240"/>
+                        <rect key="frame" x="0.0" y="92" width="414" height="200"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WWx-Q2-3wT" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="131.5" height="240"/>
+                                <rect key="frame" x="0.0" y="0.0" width="131.5" height="200"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
                                         <real key="value" value="10"/>
@@ -235,7 +235,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8Hb-eF-es4" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
-                                <rect key="frame" x="141.5" y="0.0" width="131" height="240"/>
+                                <rect key="frame" x="141.5" y="0.0" width="131" height="200"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
                                         <real key="value" value="10"/>
@@ -249,7 +249,7 @@
                                 </userDefinedRuntimeAttributes>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MxM-Ox-g5J" customClass="CustomImageView" customModule="SearchingAppStore" customModuleProvider="target">
-                                <rect key="frame" x="282.5" y="0.0" width="131.5" height="240"/>
+                                <rect key="frame" x="282.5" y="0.0" width="131.5" height="200"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadiusV">
                                         <real key="value" value="10"/>
@@ -264,7 +264,7 @@
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="height" constant="240" id="wtN-3d-g56"/>
+                            <constraint firstAttribute="height" constant="200" id="wtN-3d-g56"/>
                         </constraints>
                     </stackView>
                 </subviews>
