@@ -44,19 +44,20 @@ class SearchViewController: UIViewController {
     
     func setupBind() {
         //최근 검색어 - 전체
-        viewModel.allHistorySubject.asObservable().subscribe {
-//            print("allHistorySubject = ", $0)
+        viewModel.allHistorySubject.asObservable().subscribe { [weak self] in
+            guard let `self` = self else { return }
             self.histoyTableView?.setData(strArr: $0.element ?? [], initial: false)
         }.disposed(by: disposeBag)
         
         //search bar에서 검색했을때
-        viewModel.sortHistorySubject.asObservable().subscribe {
-//            print("sortHistorySubject = ", $0)
+        viewModel.sortHistorySubject.asObservable().subscribe { [weak self] in
+            guard let `self` = self else { return }
             self.histoyTableView?.setData(searchText: self.searchController.searchBar.text ?? "", strArr: $0.element ?? [])
         }.disposed(by: disposeBag)
         
         //검색결과는 이쪽으로 온다.
-        viewModel.requestResult.observeOn(MainScheduler.asyncInstance).subscribe {
+        viewModel.requestResult.observeOn(MainScheduler.asyncInstance).subscribe { [weak self] in
+            guard let `self` = self else { return }
             if let error = $0.error {
                 print("requestResult = ", error)
             } else {
@@ -66,7 +67,9 @@ class SearchViewController: UIViewController {
             }
         }.disposed(by: disposeBag)
          
-        searchController.searchBar.rx.searchButtonClicked.observeOn(MainScheduler.asyncInstance).asDriver(onErrorJustReturn: ()).drive(onNext: {
+        searchController.searchBar.rx.searchButtonClicked.observeOn(MainScheduler.asyncInstance).asDriver(onErrorJustReturn: ()).drive(onNext: { [weak self] in
+            
+            guard let `self` = self else { return }
             if let text = self.searchController.searchBar.text {
                 self.viewModel.saveData(text: text)
                 self.viewModel.loadData()
@@ -79,7 +82,9 @@ class SearchViewController: UIViewController {
 //            self.searchController.isActive = false
         }).disposed(by: disposeBag)
             
-        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: {
+        searchController.searchBar.rx.cancelButtonClicked.asDriver(onErrorJustReturn: ()).drive(onNext: { [weak self] in
+            
+            guard let `self` = self else { return }
             self.listShowing(index: ViewingList.History.rawValue)
             if let histoyTableView = self.histoyTableView {
                 histoyTableView.setData(strArr: self.viewModel.allHistorySubject.value, initial: false)
@@ -87,8 +92,9 @@ class SearchViewController: UIViewController {
             self.dataLoadingVisible(isLoading: false)
         }).disposed(by: disposeBag)
          
-        searchController.searchBar.rx.text.orEmpty.subscribe(onNext: {
-//            print("searchBar.rx.text: \($0)")
+        searchController.searchBar.rx.text.orEmpty.subscribe(onNext: { [weak self] in
+            
+            guard let `self` = self else { return }
             self.listShowing(index: ViewingList.History.rawValue)
             
             if $0 == "" {

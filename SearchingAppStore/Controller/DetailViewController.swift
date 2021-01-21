@@ -29,8 +29,10 @@ class DetailViewController: UIViewController {
          
         if let artworkUrl60 = appInfo?.artworkUrl60 {
             if let imgUrl = URL(string: artworkUrl60) {
-                Util.sharedInstance.imageLoad(url: imgUrl, placeholder: nil) { result in
-                    DispatchQueue.main.async {
+                Util.sharedInstance.imageLoad(url: imgUrl, placeholder: nil) { [weak self] result in
+                    guard let `self` = self else { return }
+                    DispatchQueue.main.async { [weak self] in
+                        guard let `self` = self else { return }
                         self.addNavBarImage(image: result)
                     }
                 }
